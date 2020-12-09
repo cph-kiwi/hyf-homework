@@ -40,7 +40,7 @@ function locateMe() {
   mapLink.textContent = "";
 
   function success(position) {
-    console.log("success", status, position, mapLink);
+    //console.log("success", status, position, mapLink);
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
 
@@ -50,7 +50,7 @@ function locateMe() {
   }
 
   function error() {
-    console.log("error", status, mapLink);
+    //console.log("error", status, mapLink);
     status.textContent = "Unable to retrieve your location";
   }
 
@@ -97,3 +97,28 @@ document.querySelector("body").addEventListener("click", function () {
 
   lastClick = time;
 });
+
+// Create a function called jokeCreator that has three parameters: shouldTellFunnyJoke - boolean, logFunnyJoke - function and logBadJoke - function. If you set shouldTellFunnyJoke to true it should call the logFunnyJoke function that should log out a funny joke. And vice versa.
+let shouldTellFunnyJoke = true;
+
+function logFunnyJoke() {
+  console.log(
+    "What's the best thing about Switzerland? I don't know, but the flag is a big plus."
+  );
+}
+
+function logBadJoke() {
+  console.log(
+    "Did you hear about the actor who fell through the floorboards? He was just going through a stage."
+  );
+}
+
+function jokeCreator(shouldTellFunnyJoke, logFunnyJoke, logBadJoke) {
+  if (shouldTellFunnyJoke === true) {
+    logFunnyJoke();
+  } else {
+    logBadJoke();
+  }
+}
+
+console.log(jokeCreator(true, logFunnyJoke, logBadJoke));
