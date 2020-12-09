@@ -37,9 +37,9 @@ console.log(secondNumber());
 const objectOne = {
   id: 1,
   name: "First Example Object",
-  function: (objectFunction = function () {
+  functionKey: function () {
     return "I figured it out!";
-  }),
+  },
 };
 
-console.log(objectFunction());
+console.log(objectOne.functionKey());
