@@ -7,6 +7,44 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        margin: 0px;
+      }
+
+      * {
+        border: 2px solid hotpink;
+      }
+
+      button {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 300px;
+      }
+
+      .container div {
+        flex: 1;
+        border-top: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      canvas {
+        position: absolute;
+      }
+
+      .left {
+        border-right: 1px solid black;
+      }
+
+      .right {
+        border-left: 1px solid black;
       }
     </style>
     <meta charset="UTF-8" />
@@ -15,16 +53,21 @@
   </head>
   <body>
     <h1>Fastest Presser</h1>
-    <input />
+    <input id="timer" type="number" placeholder="Set seconds" />
     <button>Start game!</button>
-    <div class="key-contaliner">
-      <div data-key="83">
+    <div class="container">
+      <div class="left">
+        <canvas id="my-canvas-s"></canvas>
         <span>Press S</span>
+        <span id="count-s"></span>
       </div>
-      <div data-key="76">
+      <div class="right">
+        <canvas id="my-canvas-l"></canvas>
         <span>Press L</span>
+        <span id="count-l"></span>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script>
     <script src="fastest-presser.js"></script>
   </body>
 </html>
