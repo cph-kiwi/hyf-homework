@@ -1,12 +1,12 @@
-let game; // interval
-let countS = 0; // playerOne
-let countL = 0; // playerTwo
-const spanS = document.getElementById("count-s"); // playerOneScoreElement
-const spanL = document.getElementById("count-l");
-const timer = document.getElementById("timer"); // timerInput
+let interval;
+let playerOne = 0;
+let playerTwo = 0;
+const playerOneScoreElement = document.getElementById("count-s");
+const playerOneScoreElement = document.getElementById("count-l");
+const timerInput = document.getElementById("timer");
 
-const rematch = document.getElementById("button"); // buttonElement
-rematch.textContent = "Start game!";
+const buttonElement = document.getElementById("button");
+buttonElement.textContent = "Start game!";
 const message = document.getElementById("message");
 message.textContent = "Set seconds and start game by clicking on the button.";
 
@@ -30,80 +30,76 @@ function removeConfetti() {
   canvas.parentNode.removeChild(canvas);
 }
 
-function count(e) {
-  //updatePlayerScore or onKeyDown
+function updatePlayerScore(e) {
   if (e.key === "s") {
-    countS++;
+    playerOne++;
   } else if (e.key === "l") {
-    countL++;
+    playerTwo++;
   } else {
     console.log("Wrong key");
   }
-  //console.log({ countS, countL });
+  //console.log({ playerOne, playerTwo });
 }
 
 function indicateWinner() {
-  if (countS > countL) {
+  if (playerOne > playerTwo) {
     createConfetti("player-s");
-    spanS.textContent = `${countS}`;
-    spanL.textContent = `${countL}`;
+    playerOneScoreElement.textContent = `${playerOne}`;
+    playerOneScoreElement.textContent = `${playerTwo}`;
     message.textContent = "S is the winner!";
-  } else if (countL > countS) {
+  } else if (playerTwo > playerOne) {
     createConfetti("player-l");
-    spanS.textContent = `${countS}`;
-    spanL.textContent = `${countL}`;
+    playerOneScoreElement.textContent = `${playerOne}`;
+    playerOneScoreElement.textContent = `${playerTwo}`;
     message.textContent = "L is the winner!";
   } else {
     message.textContent = "Draw! Try a rematch.";
   }
 }
 
-function gameEnd() {
-  //endGame
-  document.removeEventListener("keydown", count);
-  clearInterval(game);
+function endGame() {
+  document.removeEventListener("keydown", updatePlayerScore);
+  clearInterval(interval);
   indicateWinner();
 
   //console.log("Game end");
-  countS = 0;
-  countL = 0;
+  playerOne = 0;
+  playerTwo = 0;
 
-  rematch.textContent = "Rematch!";
+  buttonElement.textContent = "Rematch!";
 }
 
-function gameStart() {
-  // startGame
-  // console.log("Surprise!");
-  spanS.textContent = "";
-  spanL.textContent = "";
+function startGame() {
+  playerOneScoreElement.textContent = "";
+  playerOneScoreElement.textContent = "";
 
   removeConfetti();
 
   message.textContent = "Who is the fastest presser?!";
 
-  const gameLength = Number(timer.value);
+  const gameLength = Number(timerInput.value);
   if (gameLength === 0 || gameLength === undefined) {
     message.textContent = "Set seconds and start game.";
     return;
   }
 
-  document.addEventListener("keydown", count);
+  document.addEventListener("keydown", updatePlayerScore);
 
-  game = setInterval(() => {
-    timer.value = Number(timer.value) - 1;
-    if (timer.value === "3") {
+  interval = setInterval(() => {
+    timerInput.value = Number(timerInput.value) - 1;
+    if (timerInput.value === "3") {
       message.textContent = "THREE!!!";
     }
-    if (timer.value === "2") {
+    if (timerInput.value === "2") {
       message.textContent = "TWO!!!";
     }
-    if (timer.value === "1") {
+    if (timerInput.value === "1") {
       message.textContent = "ONE!!!";
     }
-    if (timer.value === "0") {
-      gameEnd();
+    if (timerInput.value === "0") {
+      endGame();
     }
   }, 1000);
 }
 
-rematch.addEventListener("click", gameStart);
+buttonElement.addEventListener("click", startGame);
