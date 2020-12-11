@@ -2,7 +2,7 @@ let interval;
 let playerOne = 0;
 let playerTwo = 0;
 const playerOneScoreElement = document.getElementById("count-s");
-const playerOneScoreElement = document.getElementById("count-l");
+const playerTwoScoreElement = document.getElementById("count-l");
 const timerInput = document.getElementById("timer");
 
 const buttonElement = document.getElementById("button");
@@ -13,11 +13,12 @@ message.textContent = "Set seconds and start game by clicking on the button.";
 function createConfetti(id) {
   const canvas = document.createElement("canvas");
   canvas.setAttribute("id", "my-canvas");
-  document.getElementById(id).appendChild(canvas);
+  const parent = document.getElementById(id);
+  parent.appendChild(canvas);
   const confetti = new ConfettiGenerator({
     target: "my-canvas",
-    width: 300,
-    height: 300,
+    width: parent.offsetWidth,
+    height: parent.offsetHeight,
   });
   confetti.render();
 }
@@ -38,19 +39,17 @@ function updatePlayerScore(e) {
   } else {
     console.log("Wrong key");
   }
+  playerOneScoreElement.textContent = `${playerOne}`;
+  playerTwoScoreElement.textContent = `${playerTwo}`;
   //console.log({ playerOne, playerTwo });
 }
 
 function indicateWinner() {
   if (playerOne > playerTwo) {
     createConfetti("player-s");
-    playerOneScoreElement.textContent = `${playerOne}`;
-    playerOneScoreElement.textContent = `${playerTwo}`;
     message.textContent = "S is the winner!";
   } else if (playerTwo > playerOne) {
     createConfetti("player-l");
-    playerOneScoreElement.textContent = `${playerOne}`;
-    playerOneScoreElement.textContent = `${playerTwo}`;
     message.textContent = "L is the winner!";
   } else {
     message.textContent = "Draw! Try a rematch.";
@@ -71,7 +70,7 @@ function endGame() {
 
 function startGame() {
   playerOneScoreElement.textContent = "";
-  playerOneScoreElement.textContent = "";
+  playerTwoScoreElement.textContent = "";
 
   removeConfetti();
 
