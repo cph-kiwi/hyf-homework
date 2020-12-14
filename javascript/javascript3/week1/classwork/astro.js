@@ -5,11 +5,13 @@ fetch(url)
   .then((response) => response.json())
   .then((astronautsList) => {
     p.textContent = `There are ${astronautsList.number} astronauts in space, they are:`;
-    document.body.appendChild(p);
 
     for (const person of astronautsList.people) {
       const li = document.createElement("li");
       li.textContent = person.name;
       ul.appendChild(li);
     }
+  })
+  .catch((error) => {
+    console.error(error);
   });

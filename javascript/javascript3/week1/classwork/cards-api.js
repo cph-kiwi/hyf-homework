@@ -29,5 +29,11 @@ fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
         const image = document.createElement("img");
         image.src = deck.cards[0].images.svg;
         document.body.appendChild(image);
+      })
+      .catch((error) => {
+        console.error(error);
       });
+  })
+  .catch((error) => {
+    console.error(error);
   });
