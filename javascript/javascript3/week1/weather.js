@@ -49,11 +49,18 @@ function fetchWeather() {
     .then((data) => {
       cityNameElement.textContent = `City: ${data.name}`;
       tempElement.textContent = `Temperature: ${data.main.temp} celsius`;
-      iconElement.src = `http://openweathermap.org/img/wn/${data.weather.icon}@2x.png`;
+      const iconID = data.weather.icon;
+      iconElement.src = `http://openweathermap.org/img/wn/${iconID}@2x.png`;
       windElement.textContent = `Wind speed: ${data.wind.speed} meter/sec`;
       cloudyElement.textContent = `Cloudiness: ${data.clouds.all}%`;
-      sunriseElement.textContent = `Sunrise: ${data.sys.sunrise}`;
-      sunsetElement.textContent = `Sunset: ${data.sys.sunset}`;
+      const riseMilliseconds = data.sys.sunrise * 1000;
+      const riseDateObject = new Date(riseMilliseconds);
+      const riseTime = riseDateObject.toLocaleString();
+      sunriseElement.textContent = `Sunrise: ${riseTime}`;
+      const setMilliseconds = data.sys.sunset * 1000;
+      const setDateObject = new Date(setMilliseconds);
+      const setTime = setDateObject.toLocaleString();
+      sunsetElement.textContent = `Sunset: ${setTime}`;
     })
     .catch((error) => {
       console.error(error);
