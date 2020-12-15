@@ -2,33 +2,96 @@
 <html lang="en">
   <head>
     <style>
-      body {
-        height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      * {
+        box-sizing: border-box;
       }
 
-#city-input {
-width: 300px;
-padding: 8px;
-}
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Montserrat", sans-serif;
+        --millenial-pink: #f7cac9;
+        --peach: #f7d6c9;
+        --plum: #614e55;
+        background-color: var(--millenial-pink);
+        color: var(--plum);
+      }
 
-#submit-button {
-width: 200px;
-margin-top: 40px;
+      .large-title {
+        color: var(--plum);
+        font-weight: 800;
+      }
+
+      .medium-title {
+        color: var(--plum);
+        font-weight: 800;
+      }
+
+      .small-title {
+        color: var(--plum);
+        font-weight: 400;
+      }
+
+      .paragraph {
+        color: var(--plum);
+        font-weight: 400;
+      }
+
+      .text-input {
+        width: 300px;
+        padding: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--plum);
+        color: black;
+      }
+
+      .text-input:focus {
+        outline: none;
+        border: 1px solid black;
+        background-color: white;
+      }
+
+      .button {
+        width: 200px;
+        margin-top: 40px;
         margin-bottom: 40px;
         padding: 8px 16px;
-}
+        background-color: var(--peach);
+        border: 1px solid var(--plum);
+      }
+
+      .icon-image {
+        width: 300px;
+      }
     </style>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>javascript/javascript3/week1/weather-app</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,800;1,400;1,800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-      <h1>Weather App</h1>
-    <input id="city-input" placeholder="City name" type="text"></input>
-    <button id="submit-button" type="button">Submit</button>
+    <h1 class="large-title">Weather App</h1>
+    <input
+      class="text-input"
+      id="city-input"
+      placeholder="City name"
+      type="text"
+    />
+    <button class="button" id="button" type="button">Submit</button>
+    <p id="message" class="paragraph"></p>
+    <h2 id="displayed-city-name" class="medium-title"></h2>
+    <span id="temp" class="small-title"></span>
+    <img id="weather-type-icon" class="icon-image" src="" />
+    <span id="wind-speed" class="small-title"></span>
+    <span id="cloudy" class="small-title"></span>
+    <span id="sunrise" class="small-title"></span>
+    <span id="sunset" class="small-title"></span>
     <script src="weather.js"></script>
   </body>
 </html>
