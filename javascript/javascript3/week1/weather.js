@@ -20,8 +20,7 @@ function findCurrentLocation() {
   function success(position) {
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
-    messageElement.textContent = `Latitude: ${Math.round(
-      latitude}, Longitude: ${longitude}`;
+    messageElement.textContent = `Latitude: ${latitude}, Longitude: ${longitude}`;
   }
 
   function error() {
