@@ -57,3 +57,7 @@ body {
   margin-bottom: 40px;
   padding: 8px 16px;
 }
+
+ul {
+  list-style-type: none;
+}
