@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: "Montserrat", sans-serif;
+        --millenial-pink: #f7cac9;
+        --peach: #f7d6c9;
+        --plum: #614e55;
+        background-color: var(--millenial-pink);
+        color: var(--plum);
+      }
+
+      .large-title {
+        color: var(--plum);
+        font-weight: 800;
+      }
+
+      .medium-title {
+        color: var(--plum);
+        font-weight: 800;
+      }
+
+      .small-title {
+        color: var(--plum);
+        font-weight: 400;
+      }
+
+      .paragraph {
+        color: var(--plum);
+        font-weight: 400;
+      }
+
+      .input {
+        width: 300px;
+        padding: 8px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--plum);
+        color: black;
+      }
+
+      .input:focus {
+        outline: none;
+        border: 1px solid black;
+        background-color: white;
+      }
+
+      .button {
+        background-color: var(--peach);
+        border: 1px solid var(--plum);
+        width: 200px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+        padding: 8px 16px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>javascript/javascript3/week1/giphy-app</title>
+  </head>
+  <body>
+    <h1 class="large-title">Giphy App</h1>
+    <p class="paragraph">Powered By GIPHY</p>
+    <input class="input" id="search-input" placeholder="Search" type="text" />
+    <button class="button" id="button" type="button">Search for gif</button>
+    <input
+      class="input"
+      id="number-input"
+      placeholder="Number of gifs"
+      type="text"
+    />
+
+    <script src="giphy.js"></script>
+  </body>
+</html>
