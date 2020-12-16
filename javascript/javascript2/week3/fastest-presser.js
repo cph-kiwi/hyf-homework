@@ -5,7 +5,7 @@ const playerOneScoreElement = document.getElementById("count-s");
 const playerTwoScoreElement = document.getElementById("count-l");
 const timerInput = document.getElementById("timer");
 
-const buttonElement = document.getElementById("button");
+const buttonElement = document.document.querySelector("#button");
 buttonElement.textContent = "Start game!";
 const message = document.getElementById("message");
 message.textContent = "Set seconds and start game by clicking on the button.";
