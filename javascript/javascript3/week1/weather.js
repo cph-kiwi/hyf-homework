@@ -84,7 +84,6 @@ function fetchForecast() {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       cityNameForecastElement.textContent = `24 hour Forecast: ${data.city.name}`;
       tempForecastElement.textContent = `Temperature: ${Math.round(
         data.list[8].main.temp
@@ -100,3 +99,14 @@ function fetchForecast() {
 
 buttonElement.addEventListener("click", fetchWeather);
 buttonElement.addEventListener("click", fetchForecast);
+
+/*
+      const riseMilliseconds = data.sys.sunrise * 1000;
+      const riseDateObject = new Date(riseMilliseconds);
+      const riseTime = riseDateObject.toLocaleString();
+      sunriseElement.textContent = `Sunrise: ${riseTime}`;
+      const setMilliseconds = data.sys.sunset * 1000;
+      const setDateObject = new Date(setMilliseconds);
+      const setTime = setDateObject.toLocaleString();
+      sunsetElement.textContent = `Sunset: ${setTime}`;
+*/
