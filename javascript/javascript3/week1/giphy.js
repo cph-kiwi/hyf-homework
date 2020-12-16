@@ -1,6 +1,7 @@
 const searchInput = document.getElementById("search-input");
 const buttonElement = document.getElementById("button");
 const numberInput = document.getElementById("number-input");
+const ulElement = document.getElementById("gif-list");
 
 function getUrl(query, limit) {
   const apiKey = "TnDsmsVbSX41qtT6RnNUcRRyYdb1GcQV";
@@ -18,10 +19,11 @@ function fetchGif() {
     .then((junk) => {
       console.log(junk);
       junk.data.forEach((item) => {
+        const liElement = document.createElement("li");
         const image = document.createElement("img");
-
         image.src = item.images.fixed_width.url;
-        document.body.appendChild(image);
+        liElement.appendChild(image);
+        ulElement.appendChild(liElement);
       });
     })
     .catch((error) => {
@@ -30,10 +32,7 @@ function fetchGif() {
 }
 
 function clear() {
-  const listOfImage = document.querySelectorAll("img");
-  listOfImage.forEach((image) => {
-    document.body.removeChild(image);
-  });
+  ulElement.innerHTML = "";
 }
 
 buttonElement.addEventListener("click", fetchGif);
