@@ -10,7 +10,7 @@ function getUrl(query, limit) {
 
 function fetchGif() {
   clear();
-  const limit = numberInput.value === "" ? 1 : Number(numberInput.value);
+  const limit = numberInput.value === "" ? 20 : Number(numberInput.value);
 
   const url = getUrl(searchInput.value, limit);
 
