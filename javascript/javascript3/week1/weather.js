@@ -61,14 +61,20 @@ function fetchWeather() {
       iconElement.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
       windElement.textContent = `Wind speed: ${data.wind.speed} meter/sec`;
       cloudyElement.textContent = `Cloudiness: ${data.clouds.all}%`;
-      const riseMilliseconds = data.sys.sunrise * 1000;
-      const riseDateObject = new Date(riseMilliseconds);
-      const riseTime = riseDateObject.toLocaleString();
-      sunriseElement.textContent = `Sunrise: ${riseTime}`;
-      const setMilliseconds = data.sys.sunset * 1000;
-      const setDateObject = new Date(setMilliseconds);
-      const setTime = setDateObject.toLocaleString();
-      sunsetElement.textContent = `Sunset: ${setTime}`;
+
+      const riseUTC = data.sys.sunrise * 1000;
+      const riseDateObject = new Date(riseUTC);
+      const risedt = luxon.DateTime.fromJSDate(riseDateObject, {
+        zone: "utc",
+      }).plus({ second: data.timezone });
+      sunriseElement.textContent = `Sunrise: ${risedt.hour}: ${risedt.minute}: ${risedt.second}`;
+
+      const sunsetUTC = data.sys.sunset * 1000;
+      const sunsetDateObject = new Date(sunsetUTC);
+      const sunsetdt = luxon.DateTime.fromJSDate(sunsetDateObject, {
+        zone: "utc",
+      }).plus({ second: data.timezone });
+      sunsetElement.textContent = `Sunset: ${sunsetdt.hour}: ${sunsetdt.minute}: ${sunsetdt.second}`;
     })
     .catch((error) => {
       console.error(error);
@@ -99,14 +105,3 @@ function fetchForecast() {
 
 buttonElement.addEventListener("click", fetchWeather);
 buttonElement.addEventListener("click", fetchForecast);
-
-/*
-      const riseMilliseconds = data.sys.sunrise * 1000;
-      const riseDateObject = new Date(riseMilliseconds);
-      const riseTime = riseDateObject.toLocaleString();
-      sunriseElement.textContent = `Sunrise: ${riseTime}`;
-      const setMilliseconds = data.sys.sunset * 1000;
-      const setDateObject = new Date(setMilliseconds);
-      const setTime = setDateObject.toLocaleString();
-      sunsetElement.textContent = `Sunset: ${setTime}`;
-*/
