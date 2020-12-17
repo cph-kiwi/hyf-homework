@@ -1,7 +1,7 @@
-const searchInput = document.getElementById("search-input");
-const buttonElement = document.getElementById("button");
-const numberInput = document.getElementById("number-input");
-const ulElement = document.getElementById("gif-list");
+const searchInput = document.querySelector("#search-input");
+const buttonElement = document.querySelector("#button");
+const numberInput = document.querySelector("#number-input");
+const ulElement = document.querySelector("#gif-list");
 
 function getUrl(query, limit) {
   const apiKey = "TnDsmsVbSX41qtT6RnNUcRRyYdb1GcQV";

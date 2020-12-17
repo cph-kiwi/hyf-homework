@@ -5,7 +5,7 @@ const theCocktailDbUrl =
 fetch(theCocktailDbUrl)
   .then((response) => response.json())
   .then((list) => {
-    console.log(typeof list, list); // an object with nested array. Each item in the array is an object. The object representing each cocktail has many keys and strings associated with the keys.
+    console.log(typeof list, list); // an object with nested array. Each item in the array is an object. The object representing each cocktail has many keys, and strings associated with the keys.
   })
   .catch((error) => {
     console.error(error);

@@ -4,22 +4,22 @@ let latitude = 0;
 let longitude = 0;
 let url = "";
 
-const cityInput = document.getElementById("city-input");
-const buttonElement = document.getElementById("button");
-const messageElement = document.getElementById("message");
-const cityNameElement = document.getElementById("displayed-city-name");
-const tempElement = document.getElementById("temp");
-const iconElement = document.getElementById("weather-type-icon");
-const windElement = document.getElementById("wind-speed");
-const cloudyElement = document.getElementById("cloudy");
-const sunriseElement = document.getElementById("sunrise");
-const sunsetElement = document.getElementById("sunset");
+const cityInput = document.querySelector("#city-input");
+const buttonElement = document.querySelector("#button");
+const messageElement = document.querySelector("#message");
+const cityNameElement = document.querySelector("#displayed-city-name");
+const tempElement = document.querySelector("#temp");
+const iconElement = document.querySelector("#weather-type-icon");
+const windElement = document.querySelector("#wind-speed");
+const cloudyElement = document.querySelector("#cloudy");
+const sunriseElement = document.querySelector("#sunrise");
+const sunsetElement = document.querySelector("#sunset");
 
-const cityNameForecastElement = document.getElementById("forecast-city-name");
-const tempForecastElement = document.getElementById("forecast-temp");
-const iconForecastElement = document.getElementById("forecast-icon");
-const windForecastElement = document.getElementById("forecast-wind-speed");
-const cloudyForecastElement = document.getElementById("forecast-cloudy");
+const cityNameForecastElement = document.querySelector("#forecast-city-name");
+const tempForecastElement = document.querySelector("#forecast-temp");
+const iconForecastElement = document.querySelector("#forecast-icon");
+const windForecastElement = document.querySelector("#forecast-wind-speed");
+const cloudyForecastElement = document.querySelector("#forecast-cloudy");
 
 function findCurrentLocation() {
   function success(position) {
@@ -62,23 +62,25 @@ function fetchWeather() {
       windElement.textContent = `Wind speed: ${data.wind.speed} meter/sec`;
       cloudyElement.textContent = `Cloudiness: ${data.clouds.all}%`;
 
-      const riseUTC = data.sys.sunrise * 1000;
-      const riseDateObject = new Date(riseUTC);
-      const risedt = luxon.DateTime.fromJSDate(riseDateObject, {
-        zone: "utc",
-      }).plus({ second: data.timezone });
+      translateTime(data.sys.sunrise, data.timezone);
+      // Need to change this so that it renders correctly based on previous function all.
       sunriseElement.textContent = `Sunrise: ${risedt.hour}: ${risedt.minute}: ${risedt.second}`;
 
-      const sunsetUTC = data.sys.sunset * 1000;
-      const sunsetDateObject = new Date(sunsetUTC);
-      const sunsetdt = luxon.DateTime.fromJSDate(sunsetDateObject, {
-        zone: "utc",
-      }).plus({ second: data.timezone });
+      translateTime(data.sys.sunset, data.timezone);
+      // Need to change this so that it renders correctly based on previous function all.
       sunsetElement.textContent = `Sunset: ${sunsetdt.hour}: ${sunsetdt.minute}: ${sunsetdt.second}`;
     })
     .catch((error) => {
       console.error(error);
     });
+}
+// This is the only way I could find to add the sunrise and sunset in the local time of the designated city
+// This function isn't finished
+function translateTime(time, timezone) {
+  const DateObject = new Date(time * 1000);
+  const dt = luxon.DateTime.fromJSDate(DateObject, {
+    zone: "utc",
+  }).plus({ second: timezone });
 }
 
 function fetchForecast() {
@@ -103,5 +105,6 @@ function fetchForecast() {
     });
 }
 
-buttonElement.addEventListener("click", fetchWeather);
-buttonElement.addEventListener("click", fetchForecast);
+buttonElement
+  .addEventListener("click", fetchWeather)
+  .addEventListener("click", fetchForecast);

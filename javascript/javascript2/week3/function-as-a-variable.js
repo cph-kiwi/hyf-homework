@@ -42,4 +42,4 @@ const objectOne = {
   },
 };
 
-console.log(objectOne.functionKey());
+console.log(objectOne.method());
