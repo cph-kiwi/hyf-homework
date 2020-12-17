@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0px;
+        font-family: "Open Sans", sans-serif;
+        background-color: #f7cac9;
+      }
+
+      h1 {
+        font-family: "Alegreya", serif;
+        font-weight: 400;
+        margin-block-start: 40px;
+        margin-block-end: 40px;
+      }
+
+      input {
+        padding: 8px;
+      }
+
+      button {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-family: inherirt;
+        width: 125px;
+        font-family: inherit;
+        background-color: black;
+        color: white;
+        border: 0;
+        padding: 8px 16px;
+      }
+
+      .container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 300px;
+      }
+
+      .container > div {
+        flex: 1;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      canvas {
+        position: absolute;
+      }
+
+      .left {
+        border-right: 1px solid black;
+      }
+
+      .right {
+        border-left: 1px solid black;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hyf-homework/javascript/javascript2/week3/fastest-presser</title>
+  </head>
+  <body>
+    <h1>Fastest Presser</h1>
+    <input id="timer" type="number" placeholder="Set seconds" />
+    <button id="start">Start game!</button>
+    <p id="message">Set seconds and start game by clicking on the button.</p>
+    <div class="container">
+      <div id="player-s" class="left">
+        <span>Press S</span>
+        <span id="count-s"></span>
+      </div>
+      <div id="player-l" class="right">
+        <span>Press L</span>
+        <span id="count-l"></span>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.13/dist/index.min.js"></script>
+    <script src="fastest-presser.js"></script>
+  </body>
+</html>

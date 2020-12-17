@@ -1,0 +1,70 @@
+function functionOne() {
+  console.log("functionOne has been called");
+}
+
+function functionTwo() {
+  console.log("functionTwo has been called");
+}
+
+function functionThree() {
+  console.log("functionThree has been called");
+}
+
+const arrayOne = [functionOne, functionTwo, functionThree];
+
+function displayOne() {
+  arrayOne.map((item) => {
+    item();
+  });
+}
+
+displayOne();
+
+
+
+function functionFour() {
+  return "functionFour has been called";
+}
+
+function functionFive() {
+  return "functionFive has been called";
+}
+
+function functionSix() {
+  return "functionSix has been called";
+}
+
+const arrayTwo = [functionFour, functionFive, functionSix];
+
+function displayTwo() {
+  arrayTwo.map((item) => {
+    console.log(item());
+  });
+}
+
+displayTwo();
+
+
+
+function functionSeven() {
+  return "functionSeven has been called";
+}
+
+function functionEight() {
+  return "functionEight has been called";
+}
+
+function functionNine() {
+  return "functionNine has been called";
+}
+
+const arrayThree = [functionSeven, functionEight, functionNine];
+
+function displayThree(array) {
+  array.map((item) => {
+    console.log(item());
+  });
+}
+
+displayThree(arrayThree);
+
