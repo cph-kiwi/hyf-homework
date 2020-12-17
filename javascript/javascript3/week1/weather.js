@@ -62,25 +62,24 @@ function fetchWeather() {
       windElement.textContent = `Wind speed: ${data.wind.speed} meter/sec`;
       cloudyElement.textContent = `Cloudiness: ${data.clouds.all}%`;
 
-      translateTime(data.sys.sunrise, data.timezone);
-      // Need to change this so that it renders correctly based on previous function all.
+      const risedt = translateTime(data.sys.sunrise, data.timezone);
       sunriseElement.textContent = `Sunrise: ${risedt.hour}: ${risedt.minute}: ${risedt.second}`;
 
-      translateTime(data.sys.sunset, data.timezone);
-      // Need to change this so that it renders correctly based on previous function all.
+      const sunsetdt = translateTime(data.sys.sunset, data.timezone);
       sunsetElement.textContent = `Sunset: ${sunsetdt.hour}: ${sunsetdt.minute}: ${sunsetdt.second}`;
     })
     .catch((error) => {
       console.error(error);
     });
 }
+
 // This is the only way I could find to add the sunrise and sunset in the local time of the designated city
-// This function isn't finished
 function translateTime(time, timezone) {
   const DateObject = new Date(time * 1000);
   const dt = luxon.DateTime.fromJSDate(DateObject, {
     zone: "utc",
   }).plus({ second: timezone });
+  return dt;
 }
 
 function fetchForecast() {
