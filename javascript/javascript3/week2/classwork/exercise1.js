@@ -1,22 +1,16 @@
 // Using async await fetch yes or no from this api: https://yesno.wtf/api. log out the answer
+// this was useful - https://dev.to/shoupn/javascript-fetch-api-and-using-asyncawait-47mp
 
 const url = "https://yesno.wtf/api";
 
-async function fetchYesNo() {
-
-let promise = fetch(url).then((response) => ).then().catch();
-
-
-
-
-    let promise = new Promise((resolve, reject) => {
-      setTimeout(() => resolve("done!"), 1000)
-    });
-  
-    let result = await promise; // wait until the promise resolves (*)
-  
-    alert(result); // "done!"
+async function logYesNo() {
+  try {
+    let response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+  } catch (err) {
+    console.log(err.message);
   }
-  
-  fetchYesNo();
+}
 
+logYesNo();
