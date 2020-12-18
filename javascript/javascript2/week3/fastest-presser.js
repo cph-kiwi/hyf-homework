@@ -1,19 +1,18 @@
 let interval;
 let playerOne = 0;
 let playerTwo = 0;
-const playerOneScoreElement = document.getElementById("count-s");
-const playerTwoScoreElement = document.getElementById("count-l");
-const timerInput = document.getElementById("timer");
 
-const buttonElement = document.getElementById("button");
-buttonElement.textContent = "Start game!";
-const message = document.getElementById("message");
-message.textContent = "Set seconds and start game by clicking on the button.";
+const playerOneScoreElement = document.querySelector("#count-s");
+const playerTwoScoreElement = document.querySelector("#count-l");
+const timerInput = document.querySelector("#timer");
 
-function createConfetti(id) {
+const buttonElement = document.querySelector("#start");
+const message = document.querySelector("#message");
+
+function createConfetti(parent) {
   const canvas = document.createElement("canvas");
   canvas.setAttribute("id", "my-canvas");
-  const parent = document.getElementById(id);
+
   parent.appendChild(canvas);
   const confetti = new ConfettiGenerator({
     target: "my-canvas",
@@ -24,7 +23,9 @@ function createConfetti(id) {
 }
 
 function removeConfetti() {
-  const canvas = document.getElementById("my-canvas");
+
+  const canvas = document.querySelector("#my-canvas");
+
   if (canvas === null) {
     return;
   }
@@ -39,17 +40,23 @@ function updatePlayerScore(e) {
   } else {
     console.log("Wrong key");
   }
+
+}
+
+function renderPlayerScore() {
   playerOneScoreElement.textContent = `${playerOne}`;
   playerTwoScoreElement.textContent = `${playerTwo}`;
-  //console.log({ playerOne, playerTwo });
+
 }
 
 function indicateWinner() {
   if (playerOne > playerTwo) {
-    createConfetti("player-s");
+
+    createConfetti(document.querySelector("#player-s"));
     message.textContent = "S is the winner!";
   } else if (playerTwo > playerOne) {
-    createConfetti("player-l");
+    createConfetti(document.querySelector("#player-l"));
+
     message.textContent = "L is the winner!";
   } else {
     message.textContent = "Draw! Try a rematch.";
@@ -61,7 +68,9 @@ function endGame() {
   clearInterval(interval);
   indicateWinner();
 
-  //console.log("Game end");
+  renderPlayerScore();
+
+
   playerOne = 0;
   playerTwo = 0;
 
