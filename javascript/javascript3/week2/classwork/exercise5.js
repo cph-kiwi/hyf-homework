@@ -28,7 +28,10 @@ async function run() {
     console.log(astronauts);
     const response = await fetch(url);
     const movies = await response.json();
-    console.log(movies);
+    const highestRatedMovies = movies
+      .filter((movie) => movie.rating > 9)
+      .map((filteredMovie) => filteredMovie.title);
+    console.log(highestRatedMovies);
   } catch (error) {
     console.log(error);
   }

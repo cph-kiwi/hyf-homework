@@ -25,8 +25,21 @@ async function getMovies() {
   }
 }
 
+// with promise.all we are waiting for both at the same time, rather than one at a time.
+
 Promise.all([getAstronauts(), getMovies(), navigator.getBattery()]).then(
   ([astronauts, movies, battery]) => {
     console.log(movies, battery);
   }
 );
+
+// const astroPromise = fetch(url).then((response) => response.json());
+// const moviePromise = fecth(url).then((response) => response.json());
+
+// Promise.all([getAstronauts(), getMovies(), navigator.getBattery()])
+// .then((data) => {
+// console.log(data)
+// })
+// .catch((error) => {
+// console.log(error);
+// })

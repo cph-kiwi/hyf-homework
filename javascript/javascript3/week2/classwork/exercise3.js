@@ -18,5 +18,5 @@ const promise2 = new Promise((resolve, reject) => {
 });
 
 promise2.catch((error) => {
-  console.log(error.message);
+  console.error(error.message);
 });
