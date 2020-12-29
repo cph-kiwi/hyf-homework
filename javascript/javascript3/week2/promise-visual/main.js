@@ -28,7 +28,7 @@ async function translateOneByOne() {
   }
 }
 
-// translateOneByOne();
+translateOneByOne();
 
 function translateAllAtOnce() {
   Promise.all([
@@ -40,10 +40,4 @@ function translateAllAtOnce() {
   });
 }
 
-translateAllAtOnce();
-
-window.moveElement = moveElement;
-
-// moveElement(document.querySelector("li"), { x: 100, y: 100 }).then(() => {
-//   console.log("Element has been moved");
-// });
+// translateAllAtOnce();

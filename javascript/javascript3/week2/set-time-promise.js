@@ -2,21 +2,17 @@
 // When you have written the promise, use it with async/await
 
 function functionThatReturnsAPromise(resolveAfter) {
-  return new Promise(() => {
+  return new Promise((resolve) => {
     const milliseconds = resolveAfter * 1000;
     setTimeout(() => {
-      console.log("I am called asynchronously");
+      resolve();
     }, milliseconds);
   });
 }
 
 async function run() {
-  try {
-    const data = await functionThatReturnsAPromise(5);
-    console.log(data);
-  } catch (error) {
-    console.log(error);
-  }
+  await functionThatReturnsAPromise(5);
+  console.log("I am called asynchronously");
 }
 
 run();

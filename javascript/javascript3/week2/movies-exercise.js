@@ -5,24 +5,28 @@
 
 const url =
   "https://gist.githubusercontent.com/pankaj28843/08f397fcea7c760a99206bcb0ae8d0a4/raw/02d8bc9ec9a73e463b13c44df77a87255def5ab9/movies.json";
-/*
-function getBadMovies() {
+
+function getMovies() {
   fetch(url)
     .then((response) => response.json())
     .then((movies) => {
-      console.log(movies);
-    const badMoviesAfter2000 = movies
-      .filter((movie) => movie.year > 2000)
-      .map((filteredMovie) => filteredMovie.title);
-    console.log(badMoviesAfter2000);
+      const badMovies = movies.filter((movie) => movie.rating < 3);
+      console.log(badMovies.map((filteredMovie) => filteredMovie.title));
+      const badMoviesAfter2000 = badMovies.filter((movie) => movie.year > 2000);
+      console.log(
+        badMoviesAfter2000.map((filteredMovie) => filteredMovie.title)
+      );
     })
     .catch((error) => {
       console.log(error.message);
     });
 }
 
-getBadMovies();
-*/
+getMovies();
+
+/*
+
+// Just for practice, I rewrote this using async/await (although it is not exactly the same function)
 
 async function getMovies() {
   try {
@@ -38,3 +42,4 @@ async function getMovies() {
 }
 
 getMovies();
+*/

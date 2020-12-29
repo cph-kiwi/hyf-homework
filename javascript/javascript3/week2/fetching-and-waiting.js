@@ -9,26 +9,25 @@
 const planetsUrl = "http://swapi.dev/api/planets/";
 const speciesUrl = "http://swapi.dev/api/species/";
 
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
 function getPlanets() {
-  setTimeout(() => {
-    fetch(planetsUrl)
-      .then((response) => response.json())
-      .then((data) => {
-        const planets = data.results;
-        const planetNames = planets.map((planet) => planet.name);
-        console.log(planetNames);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, 3000);
+  delay(3000)
+    .then(() => fetch(planetsUrl))
+    .then((response) => response.json())
+    .then((data) => {
+      const planets = data.results;
+      const planetNames = planets.map((planet) => planet.name);
+      console.log(planetNames);
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
 }
 
 getPlanets();
-
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 async function getSpecies() {
   await delay(3000);
