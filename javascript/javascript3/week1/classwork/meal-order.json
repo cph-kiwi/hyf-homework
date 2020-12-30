@@ -1,0 +1,16 @@
+[
+  {
+    "order_name": "Beth Jackson",
+    "order_id": 1,
+    "price": 290,
+    "list_of_drinks": ["cola", "fanta", "beer"],
+    "order_extras": ["cheese", "lettuce"]
+  },
+  {
+    "order_name": "Andreas Moller",
+    "order_id": 2,
+    "price": 349,
+    "list_of_drinks": ["beer", "wine"],
+    "order_extras": ["cheese", "BBQ sauce", "pickles"]
+  }
+]

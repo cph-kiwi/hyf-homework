@@ -22,6 +22,7 @@ function createConfetti(parent) {
 
 function removeConfetti() {
   const canvas = document.querySelector("#my-canvas");
+
   if (canvas === null) {
     return;
   }
@@ -59,6 +60,7 @@ function endGame() {
   document.removeEventListener("keydown", updatePlayerScore);
   clearInterval(interval);
   indicateWinner();
+
   renderPlayerScore();
 
   playerOne = 0;

@@ -1,0 +1,108 @@
+[
+  {
+    "title": "A New Hope",
+    "episode": 4,
+    "director": "George Lucas",
+    "producer": ["Gary Kurtz", "Rick McCallum"],
+    "release_date": "1977-05-25",
+    "actors": [
+      "Mark Hamill",
+      "Harrison Ford",
+      "Carrie Fisher",
+      "Peter Cushing",
+      "Alec Guinness"
+    ]
+  },
+  {
+    "title": "The Empire Strikes Back",
+    "episode": 5,
+    "director": "Irvin Kershner",
+    "producer": ["Gary Kurtz", "Rick McCallum"],
+    "release_date": "1980-05-17",
+    "actors": [
+      "Mark Hamill",
+      "Harrison Ford",
+      "Carrie Fisher",
+      "Billy Dee Williams",
+      "Anthony Daniels",
+      "David Prowse",
+      "Kenny Baker",
+      "Peter Mayhew",
+      "Frank Oz"
+    ]
+  },
+  {
+    "title": "Return of the Jedi",
+    "episode": 6,
+    "director": "Richard Marquand",
+    "producer": ["Howard G. Kazanjian", "George Lucas", "Rick McCallum"],
+    "release_date": "1983-05-25",
+    "actors": [
+      "Mark Hamill",
+      "Harrison Ford",
+      "Carrie Fisher",
+      "Billy Dee Williams",
+      "Anthony Daniels",
+      "David Prowse",
+      "Kenny Baker",
+      "Peter Mayhew",
+      "Frank Oz"
+    ]
+  },
+  {
+    "title": "The Phantom Menace",
+    "episode": 1,
+    "director": "George Lucas",
+    "producer": "Rick McCallum",
+    "release_date": "1999-05-19",
+    "actors": [
+      "Liam Neeson",
+      "Ewan McGregor",
+      "Natalie Portman",
+      "Jake Lloyd",
+      "Ahmed Best",
+      "Ian McDiarmid",
+      "Anthony Daniels",
+      "Ray Park",
+      "Kenny Baker",
+      "Pernilla August",
+      "Frank Oz"
+    ]
+  },
+  {
+    "title": "Attack of the Clones",
+    "episode": 2,
+    "director": "George Lucas",
+    "producer": "Rick McCallum",
+    "release_date": "2002-05-16",
+    "actors": [
+      "Ewan McGregor",
+      "Natalie Portman",
+      "Hayden Christensen",
+      "Ian McDiarmid",
+      "Samuel L. Jackson",
+      "Christopher Lee",
+      "Anthony Daniels",
+      "Kenny Baker",
+      "Frank Oz"
+    ]
+  },
+  {
+    "title": "Revenge of the Sith",
+    "episode": 3,
+    "director": "George Lucas",
+    "producer": "Rick McCallum",
+    "release_date": "2005-05-19",
+    "actors": [
+      "Ewan McGregor",
+      "Natalie Portman",
+      "Hayden Christensen",
+      "Ian McDiarmid",
+      "Samuel L. Jackson",
+      "Christopher Lee",
+      "Anthony Daniels",
+      "Kenny Baker",
+      "Frank Oz"
+    ]
+  }
+]
