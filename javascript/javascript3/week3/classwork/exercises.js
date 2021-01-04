@@ -8,12 +8,26 @@ class User {
     const fullName = `${this.firstName} ${this.lastName}`;
     return fullName;
   }
+
+  changeFirstName(newFirstName) {
+    this.firstName = newFirstName;
+  }
+
+  sayHi() {
+    setTimeout(
+      () => console.log(`How are you, ${this.firstName} ${this.lastName}?`),
+      2000
+    );
+  }
 }
 
 const user = new User("Beth", "Jackson");
 // console.log(user);
 // console.log(user.firstName);
 // console.log(user.getFullName());
+// user.changeFirstName("Lisa");
+// console.log(user.getFullName());
+// user.sayHi();
 
 class CV {
   constructor(email) {
@@ -33,6 +47,8 @@ class CV {
         this.jobs.splice(i, 1);
       }
     }
+    // Another way to do this:
+    // this.jobs = this.jobs.filter((currentjob) => currentjob.id !== job.id);
   }
 
   addEducation(education) {
@@ -45,6 +61,8 @@ class CV {
         this.educations.splice(i, 1);
       }
     }
+    // Another way to do this:
+    // this.educations = this.educations.filter((currentEducation) => currentEducation.id !== education.id);
   }
 
   renderCV() {
