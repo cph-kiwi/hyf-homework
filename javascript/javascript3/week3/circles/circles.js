@@ -52,6 +52,6 @@ function createNewCircle() {
 function makeArt() {
   setInterval(createNewCircle, 100);
 }
-// makeArt();
+makeArt();
 
 bodyElement.appendChild(canvas);
