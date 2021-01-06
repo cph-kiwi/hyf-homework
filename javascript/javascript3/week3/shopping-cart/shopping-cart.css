@@ -35,6 +35,11 @@ body {
   font-weight: 400;
 }
 
+label {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
 .text-input {
   width: 300px;
   padding: 8px;

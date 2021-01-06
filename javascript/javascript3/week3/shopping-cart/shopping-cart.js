@@ -2,7 +2,9 @@ const ulElement = document.querySelector("#ul");
 const userPElement = document.querySelector("#username");
 const totalPElement = document.querySelector("#total");
 const selectElement = document.querySelector("#product-options");
-const button = document.querySelector("#add-to-cart");
+const addButton = document.querySelector("#add-to-cart");
+const removeElement = document.querySelector("#remove-options");
+const removeButton = document.querySelector("#remove-from-cart");
 
 let availableProducts = [];
 
@@ -12,6 +14,16 @@ function renderSearchOptions() {
     optionElement.textContent = `${product.name}`;
     optionElement.value = `${product.name}`;
     selectElement.appendChild(optionElement);
+  });
+}
+
+function renderRemoveOptions() {
+  removeElement.innerHTML = "";
+  shoppingCart.products.forEach((product) => {
+    const optionElement = document.createElement("option");
+    optionElement.textContent = `${product.name}`;
+    optionElement.value = `${product.name}`;
+    removeElement.appendChild(optionElement);
   });
 }
 
@@ -135,7 +147,7 @@ renderSearchOptions();
 
 shoppingCart.getUser();
 
-button.addEventListener("click", () => {
+addButton.addEventListener("click", () => {
   shoppingCart.addProduct(
     availableProducts.find((product) => {
       return selectElement.value === product.name;
@@ -143,10 +155,19 @@ button.addEventListener("click", () => {
   );
   totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
   shoppingCart.renderProducts();
+  renderRemoveOptions();
 });
 
-// shoppingCart.removeProduct(playstation);
-// shoppingCart.removeProduct(gameController);
+removeButton.addEventListener("click", () => {
+  shoppingCart.removeProduct(
+    shoppingCart.products.find((product) => {
+      return removeElement.value === product.name;
+    })
+  );
+  totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
+  shoppingCart.renderProducts();
+  renderRemoveOptions();
+});
 
 // currency examples: EUR, GBP, NZD, USD
 // SInce I've used an API, convertToCurrency returns a promise and this is how I have to call it.
