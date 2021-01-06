@@ -49,6 +49,14 @@ body {
   background-color: white;
 }
 
+.select-dropdown {
+  width: 300px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--plum);
+  color: black;
+}
+
 .button {
   background-color: var(--peach);
   border: 1px solid var(--plum);

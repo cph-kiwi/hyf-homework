@@ -1,6 +1,19 @@
-const bodyElement = document.querySelector("body");
+const ulElement = document.querySelector("#ul");
 const userPElement = document.querySelector("#username");
 const totalPElement = document.querySelector("#total");
+const selectElement = document.querySelector("#product-options");
+const button = document.querySelector("#add-to-cart");
+
+let availableProducts = [];
+
+function renderSearchOptions() {
+  availableProducts.forEach((product) => {
+    const optionElement = document.createElement("option");
+    optionElement.textContent = `${product.name}`;
+    optionElement.value = `${product.name}`;
+    selectElement.appendChild(optionElement);
+  });
+}
 
 class Product {
   constructor(name, price) {
@@ -54,15 +67,14 @@ class ShoppingCart {
   }
 
   renderProducts() {
-    const productsUlElement = document.createElement("ul");
+    ulElement.innerHTML = "";
     this.products.forEach((product) => {
       const liElement = document.createElement("li");
       liElement.classList.add("list-item");
       liElement.textContent = `Name: ${product.name}
         Price: ${product.price}`;
-      productsUlElement.appendChild(liElement);
+      ulElement.appendChild(liElement);
     });
-    bodyElement.appendChild(productsUlElement);
   }
 
   getUser() {
@@ -79,50 +91,62 @@ class ShoppingCart {
 }
 
 const shoppingCart = new ShoppingCart();
+
 const flatscreen = new Product("flat-screen", 5000);
-shoppingCart.addProduct(flatscreen);
+availableProducts.push(flatscreen);
 
 const laptop = new Product("laptop", 30000);
-shoppingCart.addProduct(laptop);
+availableProducts.push(laptop);
 
 const coffeeMachine = new Product("coffee machine", 800);
-shoppingCart.addProduct(coffeeMachine);
+availableProducts.push(coffeeMachine);
 
 const playstation = new Product("playstation", 5000);
-shoppingCart.addProduct(playstation);
-shoppingCart.removeProduct(playstation);
+availableProducts.push(playstation);
 
 const stereo = new Product("stereo", 2000);
-shoppingCart.addProduct(stereo);
+availableProducts.push(stereo);
 
 const headphones = new Product("headphones", 1200);
-shoppingCart.addProduct(headphones);
+availableProducts.push(headphones);
 
 const mouse = new Product("mouse", 500);
-shoppingCart.addProduct(mouse);
+availableProducts.push(mouse);
 
 const keyboard = new Product("keyboard", 300);
-shoppingCart.addProduct(keyboard);
+availableProducts.push(keyboard);
 
 const charger = new Product("charger", 400);
-shoppingCart.addProduct(charger);
+availableProducts.push(charger);
 
-const gameController = new Product("gameController", 600);
-shoppingCart.addProduct(gameController);
-shoppingCart.removeProduct(gameController);
+const gameController = new Product("game controller", 600);
+availableProducts.push(gameController);
 
 const speaker = new Product("speaker", 3000);
-shoppingCart.addProduct(speaker);
+availableProducts.push(speaker);
 
 const cable = new Product("cable", 600);
-shoppingCart.addProduct(cable);
+availableProducts.push(cable);
 
 const adapter = new Product("adapter", 100);
-shoppingCart.addProduct(adapter);
+availableProducts.push(adapter);
+
+renderSearchOptions();
 
 shoppingCart.getUser();
-totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
-shoppingCart.renderProducts();
+
+button.addEventListener("click", () => {
+  shoppingCart.addProduct(
+    availableProducts.find((product) => {
+      return selectElement.value === product.name;
+    })
+  );
+  totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
+  shoppingCart.renderProducts();
+});
+
+// shoppingCart.removeProduct(playstation);
+// shoppingCart.removeProduct(gameController);
 
 // currency examples: EUR, GBP, NZD, USD
 // SInce I've used an API, convertToCurrency returns a promise and this is how I have to call it.
