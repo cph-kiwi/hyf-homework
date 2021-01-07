@@ -66,9 +66,13 @@ class ShoppingCart {
     );
   }
 
+  removeItem(index) {
+    this.products.splice(index, 1);
+  }
+
   renderProducts() {
     ulElement.innerHTML = "";
-    this.products.forEach((product) => {
+    this.products.forEach((product, productIndex) => {
       const liElement = document.createElement("li");
       liElement.classList.add("list-item");
       liElement.textContent = `Name: ${product.name}
@@ -79,7 +83,7 @@ class ShoppingCart {
       liElement.appendChild(deleteButton);
       ulElement.appendChild(liElement);
       deleteButton.addEventListener("click", () => {
-        shoppingCart.removeProduct(product);
+        shoppingCart.removeItem(productIndex);
         totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
         shoppingCart.renderProducts();
       });
