@@ -3,8 +3,6 @@ const userPElement = document.querySelector("#username");
 const totalPElement = document.querySelector("#total");
 const selectElement = document.querySelector("#product-options");
 const addButton = document.querySelector("#add-to-cart");
-const removeElement = document.querySelector("#remove-options");
-const removeButton = document.querySelector("#remove-from-cart");
 
 let availableProducts = [];
 
@@ -14,16 +12,6 @@ function renderSearchOptions() {
     optionElement.textContent = `${product.name}`;
     optionElement.value = `${product.name}`;
     selectElement.appendChild(optionElement);
-  });
-}
-
-function renderRemoveOptions() {
-  removeElement.innerHTML = "";
-  shoppingCart.products.forEach((product) => {
-    const optionElement = document.createElement("option");
-    optionElement.textContent = `${product.name}`;
-    optionElement.value = `${product.name}`;
-    removeElement.appendChild(optionElement);
   });
 }
 
@@ -67,7 +55,7 @@ class ShoppingCart {
   }
 
   searchProduct(productName) {
-    return this.products.filter((product) => product === productName);
+    return this.products.filter((product) => product.name === productName);
   }
 
   getTotal() {
@@ -85,7 +73,16 @@ class ShoppingCart {
       liElement.classList.add("list-item");
       liElement.textContent = `Name: ${product.name}
         Price: ${product.price}`;
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete?";
+      deleteButton.classList.add("delete-button");
+      liElement.appendChild(deleteButton);
       ulElement.appendChild(liElement);
+      deleteButton.addEventListener("click", () => {
+        shoppingCart.removeProduct(product);
+        totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
+        shoppingCart.renderProducts();
+      });
     });
   }
 
@@ -145,6 +142,8 @@ availableProducts.push(adapter);
 
 renderSearchOptions();
 
+// console.log(shoppingCart.searchProduct("adapter"));
+
 shoppingCart.getUser();
 
 addButton.addEventListener("click", () => {
@@ -155,18 +154,6 @@ addButton.addEventListener("click", () => {
   );
   totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
   shoppingCart.renderProducts();
-  renderRemoveOptions();
-});
-
-removeButton.addEventListener("click", () => {
-  shoppingCart.removeProduct(
-    shoppingCart.products.find((product) => {
-      return removeElement.value === product.name;
-    })
-  );
-  totalPElement.textContent = `Shopping cart total: ${shoppingCart.getTotal()}`;
-  shoppingCart.renderProducts();
-  renderRemoveOptions();
 });
 
 // currency examples: EUR, GBP, NZD, USD

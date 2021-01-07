@@ -11,7 +11,6 @@ class User {
     fetch(`https://api.github.com/users/${this.username}/repos`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         const userUlElement = document.createElement("ul");
         const userLiElement = document.createElement("li");
         userLiElement.textContent = `${this.username}'s repositories`;
