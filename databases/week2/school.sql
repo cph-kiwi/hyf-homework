@@ -7,19 +7,23 @@
 
 CREATE DATABASE School;
 
+USE School;
+
 CREATE TABLE Class (
-    id  INTEGER PRIMARY KEY, 
+    id int AUTO_INCREMENT,
+    PRIMARY KEY (id), 
     name varchar(255),
     begins DATE,
     ends DATE
 );
 
 CREATE TABLE Student (
-    id INTEGER PRIMARY KEY,
-    name varchar(255),
-    email varchar(255),
-    phone INTEGER,
-    class_id INTEGER,
+    id int AUTO_INCREMENT,
+    PRIMARY KEY (id),
+    name varchar(200),
+    email varchar(120),
+    phone varchar(20),
+    class_id int,
     FOREIGN KEY (class_id) REFERENCES Class(id)
 );
 
