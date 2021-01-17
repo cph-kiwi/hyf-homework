@@ -12,47 +12,47 @@ CREATE DATABASE Restaurant;
 USE Restaurant;
 
 CREATE TABLE Customer (
-    id  int NOT NULL AUTO_INCREMENT,
-    first_name varchar(120) NOT NULL,
-    last_name varchar(120) NOT NULL,
-    address varchar(255),
-    phone varchar(20) NOT NULL,
-    email varchar(120),
+    id  INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(120) NOT NULL,
+    last_name VARCHAR(120) NOT NULL,
+    address VARCHAR(255),
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(120) UNIQUE,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE Employee (
-    id  int NOT NULL AUTO_INCREMENT,
-    first_name varchar(120) NOT NULL,
-    last_name varchar(120) NOT NULL,
-    address varchar(255) NOT NULL,
-    phone varchar(20) NOT NULL,
-    email varchar(120) NOT NULL,
-    position ENUM('owner', 'manager', 'waiter', 'bar-staff', 'chef', 'kitchen-hand', 'cleaner') NOT NULL,
-    hire_date DATE NOT NULL,
-    salary int NOT NULL,
+    id  INT NOT NULL AUTO_INCREMENT,
+    first_name VARCHAR(120) NOT NULL,
+    last_name VARCHAR(120) NOT NULL,
+    address VARCHAR(255),
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(120) UNIQUE,
+    position ENUM('owner', 'manager', 'waiter', 'bar-staff', 'chef', 'kitchen-hand', 'cleaner'),
+    hire_date DATE,
+    salary INT NOT NULL,
     PRIMARY KEY (id)
 );
 
 CREATE TABLE Payment (
-    id int NOT NULL AUTO_INCREMENT,
-    amount int NOT NULL,
-    receipt_number int NOT NULL,
-    employee_id int,
-    customer_id int,
+    id INT NOT NULL AUTO_INCREMENT,
+    amount INT NOT NULL,
+    receipt_number INT NOT NULL,
+    employee_id INT,
+    customer_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES Employee(id),
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
 
 CREATE TABLE Occupancy (
-    id int NOT NULL AUTO_INCREMENT,
-    number_of_guests int NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    number_of_guests INT,
     table_number ENUM('one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'),
-    event_date DATETIME,
-    employee_id int,
-    customer_id int,
-    payment_id int,
+    event_date TIMESTAMP,
+    employee_id INT,
+    customer_id INT,
+    payment_id INT,
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES Employee(id),
     FOREIGN KEY (customer_id) REFERENCES Customer(id),
@@ -60,8 +60,8 @@ CREATE TABLE Occupancy (
 );
 
 ALTER TABLE Payment
-ADD occupancy_id int;
+ADD occupancy_id INT;
 
 ALTER TABLE Payment
-ADD FOREIGN KEY (occupancy_id) REFERENCES Occupancy(id);
+ADD CONSTRAINT FOREIGN KEY (occupancy_id) REFERENCES Occupancy(id);
 

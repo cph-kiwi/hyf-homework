@@ -10,20 +10,20 @@ CREATE DATABASE School;
 USE School;
 
 CREATE TABLE Class (
-    id int AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     PRIMARY KEY (id), 
-    name varchar(255),
+    name VARCHAR(255),
     begins DATE,
     ends DATE
 );
 
 CREATE TABLE Student (
-    id int AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     PRIMARY KEY (id),
-    name varchar(200),
-    email varchar(120),
-    phone varchar(20),
-    class_id int,
+    name VARCHAR(200),
+    email VARCHAR(120),
+    phone VARCHAR(20),
+    class_id INT,
     FOREIGN KEY (class_id) REFERENCES Class(id)
 );
 
