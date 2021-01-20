@@ -86,12 +86,10 @@ INSERT INTO Reaction (reaction, user_id, post_id)
 VALUES ("like", 2, 1);
 
 -- This should work
-
 INSERT INTO Reaction (reaction, user_id, post_id)
 VALUES ("laugh", 2, 1);
 
 -- This shouldn't work
-
 INSERT INTO Reaction (reaction, user_id, post_id)
 VALUES ("like", 2, 1);
 
