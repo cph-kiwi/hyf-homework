@@ -182,8 +182,7 @@ LIMIT 2;
 
 -- Get the meals that have good reviews
 
--- Not sure how to avoid repeating meal rows where a single meal has received multiple good reviews.
-SELECT Meal.*
+SELECT DISTINCT Meal.*
 FROM Meal
 INNER JOIN Review ON Meal.id=Review.meal_id
 WHERE Review.stars = 5;

@@ -17,7 +17,7 @@ CREATE TABLE Post (
 id INT NOT NULL AUTO_INCREMENT,
 content VARCHAR(120) NOT NULL,
 creation_date DATETIME,
-update_date DATETIME, -- This needs to relate to a post id and the post_author_id's need to match
+update_date DATETIME,
 post_author_id INT,
 PRIMARY KEY (id),
 FOREIGN KEY (post_author_id) REFERENCES User(id)
@@ -27,7 +27,7 @@ CREATE TABLE Comment (
 id INT NOT NULL AUTO_INCREMENT,
 content VARCHAR(120) NOT NULL,
 creation_date DATETIME,
-update_date DATETIME,  -- This needs to relate to a comment id and the comment_author_id's need to match
+update_date DATETIME,
 comment_author_id INT,
 post_id INT,
 parent_comment_id INT, -- can be NULL
@@ -64,8 +64,8 @@ VALUES ("Andreas Møller", "andreas.moller@gmail.com", "misterie", "2021-01-20 0
 INSERT INTO Post (content, creation_date, post_author_id)
 VALUES ("Insane weather today!", "2021-01-21 10:05:12", 1);
 
-INSERT INTO Post (content, update_date, post_author_id) -- if it is an update, it should include a post_id to be changed/updated
-VALUES ("Insanely snowy weather today!", "2021-01-21 12:14:32", 1);
+INSERT INTO Post (id, content, update_date, post_author_id)
+VALUES (1, "Insanely snowy weather today!", "2021-01-21 12:14:32", 1);
 
 INSERT INTO Post (content, creation_date, post_author_id)
 VALUES ("Finally finshed my homework.", "2021-01-21 08:39:51", 2);
@@ -73,14 +73,14 @@ VALUES ("Finally finshed my homework.", "2021-01-21 08:39:51", 2);
 INSERT INTO Comment (content, creation_date, comment_author_id, post_id)
 VALUES ("Agreed, I got very wet.", "2021-01-21 14:46:22", 2, 1);
 
-INSERT INTO Comment (content, update_date, comment_author_id, post_id) -- if it is an update, it should have a comment_id, not a post_id
-VALUES ("Agreed, I got very wet, and my dog did NOT like it.", "2021-01-21 16:46:22", 2, 1);
+INSERT INTO Comment (id, content, update_date, comment_author_id, post_id)
+VALUES (1, "Agreed, I got very wet, and my dog did NOT like it.", "2021-01-21 16:46:22", 2, 1);
 
 INSERT INTO Comment (content, creation_date, comment_author_id, parent_comment_id)
 VALUES ("I'm sorry to hear your dog doesn't enjoy the snow.", "2021-01-21 20:13:08", 1, 1);
 
-INSERT INTO Comment (content, update_date, comment_author_id, id) -- if it is an update, it should have a id
-VALUES ("Maybe your dog needs a little coat.", "2021-01-21 20:23:37", 1, ?); -- Is id = 1, 2, or 3
+INSERT INTO Comment (id, content, update_date, comment_author_id, parent_comment_id)
+VALUES (2, "Maybe your dog needs a little coat.", "2021-01-21 20:23:37", 1, 1);
 
 INSERT INTO Reaction (reaction, user_id, post_id)
 VALUES ("like", 2, 1);
