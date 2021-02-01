@@ -5,6 +5,7 @@ const app = express();
 const createTitle = require("./title_creator.js");
 const renderProjectsList = require("./project_creator.js");
 const addCSS = require("./css_creator.js");
+const path = require("path");
 
 const projects = [
   {
@@ -28,26 +29,15 @@ const projects = [
 app.get("/", (request, response) => {
   response.send(
     ` ${createTitle("Home")}
-    <body style="${addCSS}">
-        <h1 style="color: #614e55; font-weight: 800">My portfolio</h1>
+    <body>
+        <h1>My portfolio</h1>
         <p>My name is Beth Jackson. I'm from New Zealand and live in Copenhagen. My career background is in university administration, and now I study software development.</p>
-        <h2 style="color: #614e55; font-weight: 800">See more...</h2>
-        <ul style="list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center">
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="http://localhost:3000/contact">Contacts</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="http://localhost:3000/education">Education</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="http://localhost:3000/skills">Skills</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="http://localhost:3000/projects">Projects</a></li>
+        <h2>See more...</h2>
+        <ul>
+        <li><a href="http://localhost:3000/contact">Contacts</a></li>
+        <li><a href="http://localhost:3000/education">Education</a></li>
+        <li><a href="http://localhost:3000/skills">Skills</a></li>
+        <li><a href="http://localhost:3000/projects">Projects</a></li>
         </ul>
     </body>
   `
@@ -57,28 +47,15 @@ app.get("/", (request, response) => {
 app.get("/contact", (request, response) => {
   response.send(`
   ${createTitle("Contact")}
-      <body style="${addCSS}">
-        <h1 style="color: #614e55; font-weight: 800">Contact</h1>
+      <body>
+        <h1>Contact</h1>
         <p>This is a contact page</p>
-        <ul style="list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center">
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="https://cph.kiwi" target="_blank">Beth's website</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="beth.jack@gmail.com" target="_blank">beth.jack@gmail.com</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="https://www.linkedin.com/in/beth-jackson-4a29ab193/" target="_blank">LinkedIn</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="https://github.com/cph-kiwi" target="_blank">Github</a></li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center"><a href="https://twitter.com/cph_kiwi" target="_blank">Twitter</a></li>
+        <ul>
+        <li><a href="https://cph.kiwi" target="_blank">Beth's website</a></li>
+        <li><a href="beth.jack@gmail.com" target="_blank">beth.jack@gmail.com</a></li>
+        <li><a href="https://www.linkedin.com/in/beth-jackson-4a29ab193/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/cph-kiwi" target="_blank">Github</a></li>
+        <li><a href="https://twitter.com/cph_kiwi" target="_blank">Twitter</a></li>
         </ul>
     </body>
   `);
@@ -87,22 +64,13 @@ app.get("/contact", (request, response) => {
 app.get("/education", (request, response) => {
   response.send(`
   ${createTitle("Education")}
-      <body style="${addCSS}">
-        <h1 style="color: #614e55; font-weight: 800">My education</h1>
+      <body>
+        <h1>My education</h1>
         <p>This is an education page</p>
-        <ul style="list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center">
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">BCom in Management minoring in Philosophy from the University of Otago</li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">BSc in Psychology from the University of Otago</li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">PRINCE2 from Westminster University</li>
+        <ul>
+        <li>BCom in Management minoring in Philosophy from the University of Otago</li>
+        <li>BSc in Psychology from the University of Otago</li>
+        <li>PRINCE2 from Westminster University</li>
         </ul>
     </body>
   `);
@@ -111,22 +79,13 @@ app.get("/education", (request, response) => {
 app.get("/skills", (request, response) => {
   response.send(`
   ${createTitle("Skills")}
-      <body style="${addCSS}">
-        <h1 style="color: #614e55; font-weight: 800">My skills</h1>
+      <body>
+        <h1>My skills</h1>
         <p>This is a skills page</p>
-        <ul style="list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center">
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">Organised</li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">Efficient</li>
-        <li style="display: flex;
-        flex-direction: column;
-        align-items: center">Good communicator</li>
+        <ul>
+        <li>Organised</li>
+        <li>Efficient</li>
+        <li>Good communicator</li>
         </ul>
     </body>
   `);
@@ -135,17 +94,18 @@ app.get("/skills", (request, response) => {
 app.get("/projects", (request, response) => {
   response.send(`
   ${createTitle("Projects")}
-      <body style="${addCSS}">
-        <h1 style="color: #614e55; font-weight: 800">My projects</h1>
+      <body>
+        <h1>My projects</h1>
         <p>This is a projects page</p>
-        <ul style="list-style-type: none;
-        display: flex;
-        flex-direction: column;
-        align-items: center">
+        <ul>
         ${renderProjectsList(projects)}
         </ul>
     </body>
   `);
+});
+
+app.get("/test-report", function (requset, response) {
+  response.sendFile(path.join(__dirname + "/test-report.html"));
 });
 
 const server = app.listen(3000, function () {
@@ -153,4 +113,4 @@ const server = app.listen(3000, function () {
 });
 
 // Export app for testing purposes
-module.exports = server;
+module.exports = app;

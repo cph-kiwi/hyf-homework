@@ -1,5 +1,10 @@
+const addCSS = require("./css_creator.js");
+
 const createTitle = (title) => {
-  return `<head><title>${title}</title></head>`;
+  return `<head>
+  ${addCSS()}
+  <title>${title}</title>
+  </head>`;
 };
 
 module.exports = createTitle;

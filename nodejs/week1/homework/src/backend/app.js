@@ -5,47 +5,51 @@ const meals = require("./data/meals");
 const reviews = require("./data/reviews");
 const reservations = require("./data/reservations");
 
+function getMealsWithReviews() {
+  const copiedMeals = JSON.parse(JSON.stringify(meals));
+  const mealsWithReviews = copiedMeals.map((meal) => {
+    meal.reviews = reviews.filter((review) => review.mealId === meal.id);
+    return meal;
+  });
+  return mealsWithReviews;
+}
+
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 app.get("/", async (request, response) => {
   response.send("Meal Sharing Web App");
 });
 
-
-
 app.get("/meals", async (request, response) => {
-  response.json(
+  response.json(getMealsWithReviews());
+});
 
-    const copiedMeals = JSON.parse(JSON.stringify(meals));
-    const mealsWithReviews = copiedMeals.map((meal) => {
-      meal.reviews = reviews.filter((review) => review.mealId === meal.id);
-      return meal;
-
-    };
-    );
-    );
-  });
-
-// need to include reviews
 app.get("/cheap-meals", async (request, response) => {
-  response.json(meals.filter((meal) => meal.price < 100));
+  response.json(getMealsWithReviews().filter((meal) => meal.price < 100));
 });
 
-// need to include reviews
 app.get("/large-meals", async (request, response) => {
-  response.json(meals.filter((meal) => meal.maxNumberOfGuests > 6));
+  response.json(
+    getMealsWithReviews().filter((meal) => meal.maxNumberOfGuests > 6)
+  );
 });
 
-// random meal including reviews
 app.get("/meal", async (request, response) => {
-  response.json(meals); // need to complete this
+  const index = Math.round(
+    getRandomNumber(0, getMealsWithReviews().length - 1)
+  );
+  response.json(getMealsWithReviews()[index]);
 });
 
 app.get("/reservations", async (request, response) => {
   response.json(reservations);
 });
 
-// random reservation
 app.get("/reservation", async (request, response) => {
-  response.json(reservations); // need to complete this
+  const index = Math.round(getRandomNumber(0, reservations.length - 1));
+  response.json(reservations[index]);
 });
 
 module.exports = app;
