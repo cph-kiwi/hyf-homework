@@ -1,0 +1,89 @@
+What is the server and what is the client?
+
+The World Wide Web is about communication between web clients and web servers.
+Clients are often browsers (Chrome, Edge, Safari), but they can be any type of program or device.
+Servers are most often computers in the cloud.
+The server is a machine that makes a response to a client request.
+The client is any machine that makes a request.
+
+What is http?
+
+Communication between clients and servers is done by requests and responses:
+1. A client (a browser) sends an HTTP request to the web
+2. A web server receives the request
+3. The server runs an application to process the request
+4. The server returns an HTTP response (output) to the browser
+5. The client (the browser) receives the response
+
+HTTP stands for Hyper Text Transfer Protocol
+Communication between client computers and web servers is done by sending HTTP
+Requests and receiving HTTP Responses
+
+What is Node.js?
+
+Node.js is software that allows you to use JavaScript to write the application part of the backend.
+The application is written in different .js files, and are then read and executed using
+the node command in the Command Line.
+For example, node script.js.
+
+Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine and executes
+JavaScript code outside a web browser.
+Node.js is an open source server environment
+Node.js uses JavaScript on the server
+Node.js can generate dynamic page content
+Node.js can create, open, read, write, delete, and close files on the server
+Node.js can collect form data
+Node.js can add, delete, modify data in your database
+Node.js files contain tasks that will be executed on certain events
+A typical event is someone trying to access a port on the server
+Node.js files must be initiated on the server before having any effect
+Node.js files have extension ".js"
+
+What is backend programming?
+
+When people refer to backend programming, they usually refer to writing the application
+part of the backend: the software that interacts with a server and database, and moves
+data from one computer to the next.
+The application consists of code that will be read by a database and/or server, so that
+they know what to do with the incoming input.
+
+What is Middleware?
+
+Middleware essentially describes any software on the server that connects an application’s front
+end to its back end.
+Think of middleware as plumbing for your site—it pipes any communication,
+like requests and responses, back and forth between your application and your server/database.
+
+What does LAMP stand for?
+
+The classic set of backend technologies (the “technology stack”) is called LAMP.
+It is an acronym that stands for Linux (operating system), Apache (server), MySQL (database),
+PHP (server-side language).
+
+a Content Delivery Network (CDN)
+A CDN is a large distributed system of “proxy” servers deployed across many data centers.
+A proxy server is just a server that acts as an intermediary between a client and a server.
+
+You might be wondering how the load balancer knows which server to send traffic to.
+The answer: algorithms.
+One popular algorithm, Round Robin, involves evenly distributing incoming requests across the your
+server farm (all your available servers). You would typically choose this approach if all of your
+servers have similar processing speed and memory.
+With another algorithm, Least Connections, the next request is sent to the server with the least
+number of active connections.
+
+REST, or REpresentational State Transfer, is an architectural style for providing standards between
+computer systems on the web, making it easier for systems to communicate with each other.
+
+HTTP
+Hypertext Transfer Protocol and it is the basic way of sending requests and receiving responses.
+
+HTTP methods (also called HTTP verbs)
+that describe what type of request is being made.
+The most important ones are:
+GET. This type of request is only about getting data from the server. Whenever a user enters a new webpage, this usually means a GET request gets send to the server to get the required files to display that webpage. All other data in the website stays unaffected.
+POST. This type of request allows the client to submit new data to the server. Generally speaking, its purpose is to store this new data into a database, or manipulate it and later return it back to the client.
+PUT. This type of request allows the client to update existing data, which is already present in the client. The data is edited and then send back to the server, similar to the POST request but more semantic.
+DELETE. This type of request tells the server to delete a particular set of data or resources.
+
+
