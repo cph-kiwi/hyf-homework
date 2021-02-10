@@ -3,12 +3,6 @@ const router = express.Router();
 
 const reviews = require("./../data/reviews");
 
-function getAReviewById(id) {
-  const copiedReviews = JSON.parse(JSON.stringify(reviews));
-  const review = copiedReviews.filter((review) => review.id === id);
-  return review;
-}
-
 router.get("/", async (request, response) => {
   try {
     response.json(reviews);
@@ -19,8 +13,15 @@ router.get("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
   try {
-    let id = Number(request.params.id);
-    response.json(getAReviewById(id));
+    const id = Number(request.params.id);
+
+    const reviewToDisplay = reviews.find((review) => review.id === id);
+
+    if (reviewToDisplay != undefined) {
+      response.json(reviewToDisplay);
+    } else {
+      response.status(400).json({ msg: "No review matches the given id" });
+    }
   } catch (error) {
     throw error;
   }

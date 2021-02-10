@@ -3,14 +3,6 @@ const router = express.Router();
 
 const reservations = require("./../data/reservations");
 
-function getAReservationById(id) {
-  const copiedReservations = JSON.parse(JSON.stringify(reservations));
-  const reservation = copiedReservations.filter(
-    (reservation) => reservation.id === id
-  );
-  return reservation;
-}
-
 router.get("/", async (request, response) => {
   try {
     response.json(reservations);
@@ -21,8 +13,17 @@ router.get("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
   try {
-    let id = Number(request.params.id);
-    response.json(getAReservationById(id));
+    const id = Number(request.params.id);
+
+    const reservationToDisplay = reservations.find(
+      (reservation) => reservation.id === id
+    );
+
+    if (reservationToDisplay != undefined) {
+      response.json(reservationToDisplay);
+    } else {
+      response.status(400).json({ msg: "No reservation matches the given id" });
+    }
   } catch (error) {
     throw error;
   }

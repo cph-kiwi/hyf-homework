@@ -4,62 +4,60 @@ const router = express.Router();
 const meals = require("./../data/meals.json");
 const reviews = require("./../data/reviews");
 
-let mealsToDisplay = [];
+const mealsWithReviews = getMealsWithReviews();
 
 function getMealsWithReviews() {
-  const copiedMeals = JSON.parse(JSON.stringify(mealsToDisplay));
-  const mealsWithReviews = copiedMeals.map((meal) => {
-    meal.reviews = reviews.filter((review) => review.mealId === meal.id);
-    return meal;
+  return meals.map((meal) => {
+    return {
+      ...meal,
+      reviews: reviews.filter((review) => review.mealId === meal.id),
+    };
   });
-  return mealsWithReviews;
-}
-
-function getAMealById(id) {
-  const copiedMeals = JSON.parse(JSON.stringify(meals));
-  const meal = copiedMeals.filter((meal) => meal.id === id);
-  return meal;
 }
 
 router.get("/", async (request, response) => {
   try {
-    let maxPrice = Number(request.query.maxPrice);
-    let titleSearch = request.query.title;
-    let createdAfter = request.query.createdAfter;
-    let limit = Number(request.query.limit);
-
-    mealsToDisplay = meals
+    const mealsToDisplay = mealsWithReviews
       .filter((meal) => {
-        if (maxPrice) {
-          return meal.price <= maxPrice;
+        const maxPrice = request.query.maxPrice;
+        if (request.query.maxPrice != undefined) {
+          return meal.price <= Number(maxPrice);
         } else {
           return true;
         }
       })
       .filter((meal) => {
-        // This one is not working
-        if (titleSearch) {
-          return meal.title.toLowerCase().includes(titleSearch.toLowerCase());
+        const searchTerm = request.query.title;
+        if (request.query.title != undefined) {
+          return meal.title.toLowerCase().includes(searchTerm.toLowerCase());
         } else {
           return true;
         }
       })
       .filter((meal) => {
-        // This one is not working
-        if (createdAfter) {
-          return meal.createdAt > createdAfter;
+        const createdAfter = request.query.createdAfter;
+        if (request.query.createdAfter != undefined) {
+          return meal.createdAt >= createdAfter.replace(/\-/g, "/");
         } else {
           return true;
         }
       })
       .filter((meal, i) => {
-        if (limit) {
+        const limit = Number(request.query.limit);
+        if (request.query.limit != undefined) {
           return i < limit;
         } else {
           return true;
         }
       });
-    response.json(getMealsWithReviews());
+
+    if (mealsToDisplay.length > 0) {
+      response.json(mealsToDisplay);
+    } else {
+      response
+        .status(400)
+        .json({ msg: "No meal matches your search parameters" });
+    }
   } catch (error) {
     throw error;
   }
@@ -67,8 +65,15 @@ router.get("/", async (request, response) => {
 
 router.get("/:id", async (request, response) => {
   try {
-    let id = Number(request.params.id);
-    response.json(getAMealById(id));
+    const id = Number(request.params.id);
+
+    const mealToDisplay = mealsWithReviews.find((meal) => meal.id === id);
+
+    if (mealToDisplay != undefined) {
+      response.json(mealToDisplay);
+    } else {
+      response.status(400).json({ msg: "No meal matches the given id" });
+    }
   } catch (error) {
     throw error;
   }
