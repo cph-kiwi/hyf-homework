@@ -5,8 +5,8 @@ const router = express.Router();
 const movies = require("../data/movies.json");
 
 router.get("/", async (request, response) => {
-  let beginYear = parseInt(request.query.beginYear);
-  let endYear = parseInt(request.query.endYear);
+  let beginYear = Number(request.query.beginYear);
+  let endYear = Number(request.query.endYear);
   let minRating = parseFloat(request.query.minRating);
 
   beginYear = beginYear > 0 ? beginYear : 0;
@@ -31,13 +31,13 @@ router.get("/", async (request, response) => {
 
 router.get("/:year", async (request, response) => {
   const found = movies.some(
-    (movie) => movie.year === parseInt(request.params.year)
+    (movie) => movie.year === Number(request.params.year)
   );
 
   if (found) {
     response.send({
       data: movies.filter(
-        (movie) => movie.year === parseInt(request.params.year) // request.params.year is a string and must be converted to a number before comparison
+        (movie) => movie.year === Number(request.params.year) // request.params.year is a string and must be converted to a number before comparison
       ),
     });
   } else {
