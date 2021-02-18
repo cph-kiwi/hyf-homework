@@ -3,6 +3,8 @@ const { request } = require("http");
 const app = express();
 const router = express.Router();
 
+app.use(express.json());
+
 // app.get("/", (request, response) => response.send("nodejs week3 homework"));
 
 // router.use("/add", (request, response) => {
@@ -54,30 +56,37 @@ router.get("/divide", (request, response) => {
 });
 
 router.post("/add", (request, response) => {
-  console.log(request.body);
-  // const sum = Object.values(request.body)
-  //     .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
-  //     .map((param) => Number(param))
-  //     .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-  // response.send(`${sum}`);
-  response.send("add");
+  const sum = Object.values(request.body)
+    .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
+    .map((param) => Number(param))
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+  response.json(sum);
 });
 
-//   router.post("/subtract", (request, response) => {
-//     const difference = ;
-//     response.send(`${difference}`);
-//   });
+router.post("/subtract", (request, response) => {
+  const difference = Object.values(request.body)
+    .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
+    .map((param) => Number(param))
+    .reduce((previous, current) => previous - current);
+  response.json(difference);
+});
 
-//   router.post("/multiply", (request, response) => {
-//     const product = ;
-//     response.send(`${product}`);
-//   });
+router.post("/multiply", (request, response) => {
+  const product = Object.values(request.body)
+    .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
+    .map((param) => Number(param))
+    .reduce((previous, current) => previous * current);
+  response.json(product);
+});
 
-//   router.post("/divide", (request, response) => {
-//     const quotient = ;
-//     response.send(`${quotient}`);
-//   });
+router.post("/divide", (request, response) => {
+  const quotient = Object.values(request.body)
+    .reduce((accumulator, currentValue) => accumulator.concat(currentValue), [])
+    .map((param) => Number(param))
+    .reduce((previous, current) => previous / current);
+  response.json(quotient);
+});
 
 app.use("/calculator", router);
 
-app.listen(3000, () => console.log("Calculator:listening on port 3000"));
+app.listen(3000, () => console.log("Calculator: listening on port 3000"));
