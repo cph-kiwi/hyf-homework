@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import "./styles.css";
 
 // <TodoTable>
 //    <HeadingBar />
@@ -10,21 +11,21 @@ import ReactDOM from "react-dom";
 // </TodoTable>
 
 function HeadingBar() {
-  return <h1>Beth's to-do list</h1>;
+  return <h1 className="large-title">Beth's to-do list</h1>;
 }
 
 function ItemTitle({ title }) {
-  return <h2>{title}</h2>;
+  return <h2 className="medium-title">{title}</h2>;
 }
 
 function ItemDetails({ title, task, dateCreated, deadline }) {
   return (
-    <li>
+    <div>
       <ItemTitle title={title} />
-      <p>Task: {task}</p>
-      <p>Date created: {dateCreated}</p>
-      <p>Deadline: {deadline}</p>
-    </li>
+      <p className="paragraph">Task: {task}</p>
+      <p className="paragraph">Date created: {dateCreated}</p>
+      <p className="paragraph">Deadline: {deadline}</p>
+    </div>
   );
 }
 
