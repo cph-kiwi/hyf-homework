@@ -1,48 +1,37 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-const toDoItems = [
+function getRandomNumber(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+const descriptions = [
+  "Get out of bed",
+  "Brush teeth",
+  "Eat breakfast",
+  "Make appointment with doctor",
+  "Tidy up garden",
+  "Return books to library",
+  "Buy shoes",
+  "Collect prescription",
+  "Hang out laundry",
+];
+
+const todos = [
   {
     id: 1,
-    title: "Doctor",
-    task: "Book appointment for daughter regarding earache",
-    dateCreated: "Mon Feb 22 2021",
-    deadline: "Tues Feb 23 2021",
+    description: "Get out of bed",
+    complete: false,
   },
   {
     id: 2,
-    title: "Garden",
-    task: "Tidy up garden - remove weeds and mow lawn",
-    dateCreated: "Fri Feb 19 2021",
-    deadline: "Mon Feb 22 2021",
+    description: "Brush teeth",
+    complete: false,
   },
   {
     id: 3,
-    title: "Books",
-    task: "Return books to the library",
-    dateCreated: "Mon Feb 22 2021",
-    deadline: "Fri Feb 26 2021",
-  },
-  {
-    id: 4,
-    title: "Shoes",
-    task: "Order shoes for daughter online",
-    dateCreated: "Sun Feb 21 2021",
-    deadline: "Thu Feb 25 2021",
-  },
-  {
-    id: 5,
-    title: "Prescription",
-    task: "Collect prescription from pharmacy",
-    dateCreated: "Mon Feb 22 2021",
-    deadline: "Fri Feb 26 2021",
-  },
-  {
-    id: 6,
-    title: "Laundry",
-    task: "Wash woolens",
-    dateCreated: "Fri Feb 19 2021",
-    deadline: "Mon Feb 22 2021",
+    description: "Eat breakfast",
+    complete: false,
   },
 ];
 
@@ -50,29 +39,43 @@ function HeadingBar() {
   return <h1 className="large-title">Beth's to-do list</h1>;
 }
 
-function ItemTitle({ title }) {
-  return <h2 className="medium-title">{title}</h2>;
-}
-
-function ItemDetails({ title, task, dateCreated, deadline }) {
+function ItemDetails({ description, complete, onCheck }) {
   return (
     <div>
-      <ItemTitle title={title} />
-      <p className="paragraph">Task: {task}</p>
-      <p className="paragraph">Date created: {dateCreated}</p>
-      <p className="paragraph">Deadline: {deadline}</p>
+      <p className="paragraph">{description}</p>
+      <input
+        type="checkbox"
+        value={complete}
+        onChange={(event) => {
+          onCheck(event.target.checked);
+        }}
+      />
     </div>
   );
 }
 
-function ListItemsTable(props) {
+function ListItemsTable({ toDoItems, setListOfToDos }) {
   return (
     <div>
       <ul>
-        {props.toDoItems.map((item) => {
+        {toDoItems.map((item) => {
           return (
             <li key={item.id}>
-              <ItemDetails {...item} />
+              <ItemDetails
+                description={item.description}
+                complete={item.complete}
+                onCheck={(done) => {
+                  setListOfToDos(
+                    toDoItems.map((i) => {
+                      if (i.id === item.id) {
+                        return { ...i, complete: done };
+                      } else {
+                        return i;
+                      }
+                    })
+                  );
+                }}
+              />
             </li>
           );
         })}
@@ -81,11 +84,35 @@ function ListItemsTable(props) {
   );
 }
 
-function ToDoApp(props) {
+function ToDoApp() {
+  const [listOfToDos, setListOfToDos] = useState(todos);
+
+  useEffect(() => {
+    console.log(listOfToDos);
+  }, [listOfToDos]);
+
+  const addRandomItem = () => {
+    setListOfToDos([
+      ...listOfToDos,
+      {
+        id: listOfToDos.length + 1,
+        description:
+          descriptions[Math.round(getRandomNumber(0, descriptions.length))],
+        complete: false,
+      },
+    ]);
+  };
+
   return (
     <div>
       <HeadingBar />
-      <ListItemsTable toDoItems={props.toDoItems} />
+      <button onClick={addRandomItem}>Add todo item to list</button>
+      <ListItemsTable
+        toDoItems={listOfToDos}
+        id={listOfToDos.id}
+        description={listOfToDos.description}
+        setListOfToDos={setListOfToDos}
+      />
     </div>
   );
 }
@@ -93,9 +120,17 @@ function ToDoApp(props) {
 function App() {
   return (
     <div className="App">
-      <ToDoApp toDoItems={toDoItems} />
+      <ToDoApp />
     </div>
   );
 }
 
 export default App;
+
+// const [listOfToDos, setListOfToDos] = useState(() => {
+//   const startingArray = todos.sort((item, index) => {
+//     const randomNumber = getRandomNumber(-50, 50);
+//     return randomNumber >= 0 ? 1 : -1;
+//   });
+//   return startingArray.slice(0, listLength);
+// });
