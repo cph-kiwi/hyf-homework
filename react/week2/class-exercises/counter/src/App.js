@@ -6,6 +6,7 @@ function WatchCount() {
   const [previousDirection, setPreviousDirection] = useState();
   const [speed, setSpeed] = useState(1000);
   const [textValue, setTextValue] = useState();
+  // const [isActive, SetIsActive] = useState(true);
 
   const buttonText = () => {
     if (direction === 1) {
@@ -34,6 +35,22 @@ function WatchCount() {
       clearTimeout(timerId);
     };
   }, [count, direction, speed, textValue]);
+
+  // const pause = () => {
+  //   setIsActive(false)
+  // }
+
+  // const start = () => {
+  //   setIsActive(true)
+  // }
+
+  // const handleIsActive = () => {
+  // if (isActive) {
+  // pause()
+  // } else {
+  //   start()
+  // }
+  // }
 
   return (
     <div>
