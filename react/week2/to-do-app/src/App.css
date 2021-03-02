@@ -71,6 +71,7 @@ h1 {
 ul {
   list-style-type: none;
   padding: 0;
+  width: 400px;
 }
 
 li {
@@ -79,4 +80,17 @@ li {
   padding-right: 16px;
   margin-top: 16px;
   margin-bottom: 16px;
+}
+.item-details {
+  padding-bottom: 16px;
+}
+
+.to-do-app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ruled-out {
+  text-decoration: line-through;
 }
