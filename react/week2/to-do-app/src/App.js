@@ -79,7 +79,9 @@ function ListItemsTable({ toDoItems, setListOfToDos }) {
                     setListOfToDos(
                       toDoItems.map((i) => {
                         if (i.id === item.id) {
-                          const checkedListItem = document.getElementById("target-element");
+                          const checkedListItem = document.getElementById(
+                            "target-element"
+                          );
                           checkedListItem.classList.add("ruled-out");
                           return { ...i, complete: done };
                         } else {
@@ -123,7 +125,8 @@ function ToDoApp() {
       ...listOfToDos,
       {
         id: listOfToDos.length + 1,
-        description: descriptions[Math.round(getRandomNumber(0, descriptions.length))],
+        description:
+          descriptions[Math.round(getRandomNumber(0, descriptions.length))],
         complete: false,
       },
     ]);
