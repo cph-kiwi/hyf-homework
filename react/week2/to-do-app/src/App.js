@@ -39,7 +39,6 @@ function HeadingBar() {
   return <h1 className="large-title">Beth's to-do list</h1>;
 }
 
-// deleteItem not working
 function ItemDetails({ description, complete, onCheck, deleteItem }) {
   return (
     <div className="item-details">
@@ -51,13 +50,11 @@ function ItemDetails({ description, complete, onCheck, deleteItem }) {
           onCheck(event.target.checked);
         }}
       />
-      {/* <button onclick={deleteItem()}>Delete item from list</button> */}
+      <button onClick={deleteItem}>Delete item from list</button>
     </div>
   );
 }
 
-// deleteItems not working
-// strike through not working
 function ListItemsTable({ toDoItems, setListOfToDos }) {
   if (toDoItems.length === 0) {
     return (
@@ -71,7 +68,7 @@ function ListItemsTable({ toDoItems, setListOfToDos }) {
         <ul>
           {toDoItems.map((item) => {
             return (
-              <li id="target-element" key={item.id}>
+              <li key={item.id} className={item.complete ? "ruled-out" : ""}>
                 <ItemDetails
                   description={item.description}
                   complete={item.complete}
@@ -79,10 +76,6 @@ function ListItemsTable({ toDoItems, setListOfToDos }) {
                     setListOfToDos(
                       toDoItems.map((i) => {
                         if (i.id === item.id) {
-                          const checkedListItem = document.getElementById(
-                            "target-element"
-                          );
-                          checkedListItem.classList.add("ruled-out");
                           return { ...i, complete: done };
                         } else {
                           return i;
@@ -90,13 +83,13 @@ function ListItemsTable({ toDoItems, setListOfToDos }) {
                       })
                     );
                   }}
-                  // deleteItem={() => {
-                  //   setListOfToDos(
-                  //     toDoItems.filter((i) => {
-                  //       return i.id !== item.id;
-                  //     })
-                  //   );
-                  // }}
+                  deleteItem={() => {
+                    setListOfToDos(
+                      toDoItems.filter((i) => {
+                        return i.id !== item.id;
+                      })
+                    );
+                  }}
                 />
               </li>
             );
@@ -156,11 +149,3 @@ function App() {
 }
 
 export default App;
-
-// const [listOfToDos, setListOfToDos] = useState(() => {
-//   const startingArray = todos.sort((item, index) => {
-//     const randomNumber = getRandomNumber(-50, 50);
-//     return randomNumber >= 0 ? 1 : -1;
-//   });
-//   return startingArray.slice(0, listLength);
-// });

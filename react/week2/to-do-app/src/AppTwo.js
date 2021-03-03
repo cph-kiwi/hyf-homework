@@ -74,7 +74,30 @@ function ToDoApp() {
           You have used {seconds} seconds on this website
         </p>
         <button onClick={addRandomItem}>Add todo item to list</button>
-        <ul></ul>
+        <ul>
+          {toDoItems.map((item) => {
+            return (
+              <li key={item.id}>
+                <p className="paragraph">{item.description}</p>
+                <input
+                  type="checkbox"
+                  value={item.complete}
+                  onChange={(event) => {
+                    setListOfToDos(
+                      toDoItems.map((i) => {
+                        if (i.id === item.id) {
+                          return { ...i, complete: event.target.checked };
+                        } else {
+                          return i;
+                        }
+                      })
+                    );
+                  }}
+                />
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
