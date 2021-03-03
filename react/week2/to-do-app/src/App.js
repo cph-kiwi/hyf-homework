@@ -6,15 +6,16 @@ function getRandomNumber(min, max) {
 }
 
 const descriptions = [
-  "Get out of bed",
-  "Brush teeth",
-  "Eat breakfast",
+  "Set up playdate for children",
+  "Call plumber",
+  "Fix bicycle",
   "Make appointment with doctor",
   "Tidy up garden",
   "Return books to library",
   "Buy shoes",
   "Collect prescription",
   "Hang out laundry",
+  "Order groceries online",
 ];
 
 const todos = [
