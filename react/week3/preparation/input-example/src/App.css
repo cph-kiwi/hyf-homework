@@ -1,0 +1,13 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.child-example {
+  border: 2px solid black;
+  padding: 20px;
+}
