@@ -3,15 +3,19 @@ import Heading from "./Heading";
 import Border from "./Border";
 import PropTypes from "prop-types";
 
-function ShiftDetails({ name, start, end, totalHours, priceOfShift }) {
+const hourlyRate = 200;
+
+function ShiftDetails({ name, start, end }) {
+  const shiftLength = new Date(end).getHours() - new Date(start).getHours();
+
   return (
     <Border>
       <Heading title={name} />
       <br />
-      <p>{start}</p>
-      <p>{end}</p>
-      <p>{totalHours}</p>
-      <p>{priceOfShift}</p>
+      <p>Start: {start}</p>
+      <p>End: {end}</p>
+      <p>Total hours: {shiftLength}</p>
+      <p>Price of shift: {shiftLength * hourlyRate}kr</p>
       <br />
     </Border>
   );
@@ -19,8 +23,8 @@ function ShiftDetails({ name, start, end, totalHours, priceOfShift }) {
 
 ShiftDetails.propTypes = {
   name: PropTypes.string,
-  start: PropTypes.instanceOf(Date), // should this be string?
-  end: PropTypes.instanceOf(Date), // should this be string?
+  start: PropTypes.string,
+  end: PropTypes.string,
   totalHours: PropTypes.number,
   priceOfShift: PropTypes.number,
 };

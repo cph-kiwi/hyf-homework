@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import Border from "./Border";
 import Heading from "./Heading";
-import { SubmitShiftModal } from "./SubmitShift";
+import { SubmitShiftModal } from "./SubmitShiftModal";
 import ShiftDetails from "./ShiftDetails";
+import Totals from "./Totals";
 
 const API_URL =
   "https://gist.githubusercontent.com/benna100/5fd674171ea528d7cd1d504e9bb0ca6f/raw";
@@ -10,6 +11,7 @@ const API_URL =
 function ShiftOverview() {
   const [isLoading, setIsLoading] = useState(true);
   const [shifts, setShifts] = useState([]);
+  const [show, setShow] = useState(false);
 
   const startingShifts = useCallback(() => {
     setIsLoading(true);
@@ -27,25 +29,29 @@ function ShiftOverview() {
     startingShifts();
   }, [startingShifts]);
 
-  const onSubmitShift = (shift) => {
-    setShifts((prev) => {
-      return prev.concat(shift);
-    });
-  };
-
   return (
     <Border>
       <Heading title="Shift Overview" />
-      <SubmitShiftModal onChange={onSubmitShift} />
+      <button onClick={() => setShow(true)}>Add shift</button>
+      <SubmitShiftModal
+        show={show}
+        onClose={() => setShow(false)}
+        onSubmitShift={(shift) => {
+          setShow(false);
+          setShifts((prev) => {
+            console.log(prev.concat(shift));
+            return prev.concat(shift);
+          });
+        }}
+      />
       <br />
       {isLoading && <div>Loading...</div>}
       <ul>
         {shifts.map((shift) => {
           return (
-            <div>
+            <div key={shift.name}>
               <li>
                 <ShiftDetails
-                  key={shift.name}
                   name={shift.name}
                   start={shift.start}
                   end={shift.end}
@@ -56,6 +62,7 @@ function ShiftOverview() {
           );
         })}
       </ul>
+      <Totals shifts={shifts} />
     </Border>
   );
 }
