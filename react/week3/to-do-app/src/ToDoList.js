@@ -2,6 +2,9 @@ import React from "react";
 import ToDoItem from "./ToDoItem";
 
 function ToDoList({ toDoItems, setListOfToDos }) {
+  // pull deleteItem out here
+  // Write editItem function here
+
   if (toDoItems.length === 0) {
     return (
       <div>
@@ -14,15 +17,15 @@ function ToDoList({ toDoItems, setListOfToDos }) {
         <ul>
           {toDoItems.map((item) => {
             return (
-              <li key={item.id} className={item.complete ? "ruled-out" : ""}>
+              <li key={item.id} className={item.checked ? "ruled-out" : ""}>
                 <ToDoItem
                   description={item.description}
-                  complete={item.complete}
-                  onCheck={(done) => {
+                  complete={item.checked}
+                  onCheck={(check) => {
                     setListOfToDos(
                       toDoItems.map((i) => {
                         if (i.id === item.id) {
-                          return { ...i, complete: done };
+                          return { ...i, checked: check };
                         } else {
                           return i;
                         }
