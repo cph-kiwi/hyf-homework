@@ -14,19 +14,19 @@ export function SubmitShiftModal({ onSubmitShift, show, onClose }) {
   };
 
   const onChangeStart = (event) => {
-    // console.log("start", event.target.value);
     setShift({ ...shift, start: event.target.value });
   };
 
   const onChangeEnd = (event) => {
-    // console.log("end", event.target.value);
     setShift({ ...shift, end: event.target.value });
   };
 
   const submitShift = (event) => {
-    console.log(shift);
     event.preventDefault();
     onSubmitShift(shift);
+    setShift((prev) => {
+      return { ...prev, name: "", start: "", end: "" };
+    });
   };
 
   if (!show) {
@@ -39,27 +39,28 @@ export function SubmitShiftModal({ onSubmitShift, show, onClose }) {
         <Border>
           <Heading title="Submit Shift" />
           <form className="form" onSubmit={submitShift}>
-            <label>Name:</label>
+            <label htmlFor="name">Name:</label>
             <input
+              id="name"
               type="text"
               value={shift.name}
               onChange={onChangeName}
               autoFocus={true}
             />
             <br />
-            <label for="start">Start:</label>
+            <label htmlFor="start">Start:</label>
             <input
-              type="datetime-local"
               id="start"
+              type="datetime-local"
               name="start"
               value={shift.start}
               onChange={onChangeStart}
             />
             <br />
-            <label for="end">End:</label>
+            <label htmlFor="end">End:</label>
             <input
-              type="datetime-local"
               id="end"
+              type="datetime-local"
               name="end"
               value={shift.end}
               onChange={onChangeEnd}

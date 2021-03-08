@@ -5,27 +5,46 @@ import PropTypes from "prop-types";
 
 const hourlyRate = 200;
 
-function Totals({ shifts }) {
-  // change math.sum to a reduce function
-  const totalHours = Math.sum(
-    ...shifts.map((shift) => {
+function Totals({ shifts, filteredShifts }) {
+  const totalHours = shifts
+    .map((shift) => {
       return new Date(shift.end).getHours() - new Date(shift.start).getHours();
     })
-  );
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
 
-  return (
-    <Border>
-      <Heading title="Totals" />
-      <br />
-      <p>Total hours: {totalHours}</p>
-      <p>Price of shift: {totalHours * hourlyRate}kr</p>
-      <br />
-    </Border>
-  );
+  const filteredTotalHours = filteredShifts
+    .map((shift) => {
+      return new Date(shift.end).getHours() - new Date(shift.start).getHours();
+    })
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
+  if (totalHours === []) {
+    return "No hours to report";
+  } else {
+    return (
+      <Border>
+        <Heading title="Totals" />
+        <br />
+        <p>
+          Total hours:
+          {filteredShifts === [] ? totalHours : filteredTotalHours}
+        </p>
+        <p>
+          Price of shift:
+          {filteredShifts === []
+            ? totalHours * hourlyRate
+            : filteredTotalHours * hourlyRate}
+          kr
+        </p>
+        <br />
+      </Border>
+    );
+  }
 }
 
 Totals.propTypes = {
   shifts: PropTypes.array,
+  filteredShifts: PropTypes.array,
 };
 
 export default Totals;

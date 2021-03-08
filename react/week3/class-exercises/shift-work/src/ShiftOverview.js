@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Border from "./Border";
 import Heading from "./Heading";
 import { SubmitShiftModal } from "./SubmitShiftModal";
@@ -12,8 +12,13 @@ function ShiftOverview() {
   const [isLoading, setIsLoading] = useState(true);
   const [shifts, setShifts] = useState([]);
   const [show, setShow] = useState(false);
+  const [searchName, setSearchName] = useState("");
 
-  const startingShifts = useCallback(() => {
+  const filteredShifts = shifts.filter((shift) => {
+    return shift.name.includes(searchName);
+  });
+
+  useEffect(() => {
     setIsLoading(true);
     fetch(API_URL)
       .then((response) => response.json())
@@ -25,21 +30,29 @@ function ShiftOverview() {
       });
   }, []);
 
-  useEffect(() => {
-    startingShifts();
-  }, [startingShifts]);
-
   return (
     <Border>
       <Heading title="Shift Overview" />
-      <button onClick={() => setShow(true)}>Add shift</button>
+      <label htmlFor="filter">Filter shifts</label>
+      <input
+        id="filter"
+        type="text"
+        placeholder="name"
+        value={searchName}
+        onChange={(event) => {
+          setSearchName(event.target.value);
+        }}
+      />
+      <div>
+        <br />
+        <button onClick={() => setShow(true)}>Add shift</button>
+      </div>
       <SubmitShiftModal
         show={show}
         onClose={() => setShow(false)}
         onSubmitShift={(shift) => {
           setShow(false);
           setShifts((prev) => {
-            console.log(prev.concat(shift));
             return prev.concat(shift);
           });
         }}
@@ -47,22 +60,37 @@ function ShiftOverview() {
       <br />
       {isLoading && <div>Loading...</div>}
       <ul>
-        {shifts.map((shift) => {
-          return (
-            <div key={shift.name}>
-              <li>
-                <ShiftDetails
-                  name={shift.name}
-                  start={shift.start}
-                  end={shift.end}
-                />
-              </li>
-              <br />
-            </div>
-          );
-        })}
+        {searchName === ""
+          ? shifts.map((shift) => {
+              return (
+                <div key={shift.name}>
+                  <li>
+                    <ShiftDetails
+                      name={shift.name}
+                      start={shift.start}
+                      end={shift.end}
+                    />
+                  </li>
+                  <br />
+                </div>
+              );
+            })
+          : filteredShifts.map((shift) => {
+              return (
+                <div key={shift.name}>
+                  <li>
+                    <ShiftDetails
+                      name={shift.name}
+                      start={shift.start}
+                      end={shift.end}
+                    />
+                  </li>
+                  <br />
+                </div>
+              );
+            })}
       </ul>
-      <Totals shifts={shifts} />
+      <Totals shifts={shifts} filteredShifts={filteredShifts} />
     </Border>
   );
 }
