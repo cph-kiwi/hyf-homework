@@ -112,7 +112,7 @@ function ToDoApp() {
     return () => {
       clearTimeout(timerId);
     };
-  }, [listOfToDos, seconds]);
+  }, [ seconds]);
 
   const addRandomItem = () => {
     setListOfToDos([
