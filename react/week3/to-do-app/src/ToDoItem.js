@@ -2,12 +2,7 @@ import React, { useState } from "react";
 import Border from "./Border";
 import { EditModal } from "./EditModal";
 
-function ToDoItem({
-item,
-  onCheck,
-  deleteItem,
-  editItem,
-}) {
+function ToDoItem({ item, onCheck, deleteItem, editItem }) {
   const [showEdit, setShowEdit] = useState(false);
 
   return (
@@ -19,26 +14,23 @@ item,
           type="checkbox"
           value={item.checked}
           onChange={(event) => {
-            onCheck(event.target.checked);
+            onCheck(item.id, event.target.checked);
           }}
         />
-        <button onClick={deleteItem}>Delete</button>
-        <button onClick={() => setShowEdit(true)}>
-          Edit
-        </button>
+        <button onClick={() => deleteItem(item.id)}>Delete</button>
+        <button onClick={() => setShowEdit(true)}>Edit</button>
 
-        {(showEdit) && <EditModal
-          description={item.description}
-          deadline={item.deadline}
-          showEdit={showEdit}
-          onCloseEdit={() => setShowEdit(false)}
-          onSubmitEditedItem={(item) => {
+        {showEdit && (
+          <EditModal
+            item={item}
+            showEdit={showEdit}
+            onCloseEdit={() => setShowEdit(false)}
+            onSubmitEditedItem={(id, editedItem) => {
               setShowEdit(false);
-              setListOfToDos((i) => {
-                return i.(item);
-              });
+              editItem(id, editedItem);
             }}
-        />}
+          />
+        )}
       </div>
     </Border>
   );

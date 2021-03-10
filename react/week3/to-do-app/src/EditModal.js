@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Border from "./Border";
 
 export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
+  const [editedItem, setEditedItem] = useState(item);
+
   const onChangeEditDescription = (event) => {
-    return { ...item, description: event.target.value };
+    setEditedItem({ ...editedItem, description: event.target.value });
   };
 
   const onChangeEditDeadline = (event) => {
-    return { ...item, deadline: event.target.value };
+    setEditedItem({ ...editedItem, deadline: event.target.value });
   };
 
   const submitItem = (event) => {
     event.preventDefault();
-    onSubmitEditedItem(item);
+    onSubmitEditedItem(item.id, editedItem);
   };
 
   return (
@@ -24,7 +26,7 @@ export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
             <input
               id="description"
               type="text"
-              value={description}
+              value={editedItem.description}
               onChange={onChangeEditDescription}
               autoFocus={true}
             />
@@ -34,7 +36,7 @@ export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
               id="deadline"
               type="date"
               name="deadline"
-              value={deadline}
+              value={editedItem.deadline}
               onChange={onChangeEditDeadline}
             />
             <br />

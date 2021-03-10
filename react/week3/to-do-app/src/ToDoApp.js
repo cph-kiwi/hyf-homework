@@ -12,6 +12,34 @@ function ToDoApp() {
   const [showAddItem, setShowAddItem] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
+  const checkItem = (id, check) => {
+    setListOfToDos(
+      listOfToDos.map((item) => {
+        if (item.id === id) {
+          return { ...item, checked: check };
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
+  const deleteItem = (id) => {
+    setListOfToDos(listOfToDos.filter((item) => item.id !== id));
+  };
+
+  const editItem = (id, editedItem) => {
+    setListOfToDos(
+      listOfToDos.map((item) => {
+        if (item.id === id) {
+          return editedItem;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+
   useEffect(() => {
     setIsLoading(true);
     fetch(API_URL)
@@ -54,7 +82,12 @@ function ToDoApp() {
         />
         <br />
         {isLoading && <div>Loading...</div>}
-        <ToDoList listOfToDos={listOfToDos} setListOfToDos={setListOfToDos} />
+        <ToDoList
+          listOfToDos={listOfToDos}
+          checkItem={checkItem}
+          deleteItem={deleteItem}
+          editItem={editItem}
+        />
       </Border>
     </div>
   );
