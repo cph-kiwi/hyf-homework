@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import Border from "./Border";
 
-export function AddItemModal({ onSubmitItem, show, onClose }) {
+export function AddItemModal({
+  listOfToDos,
+  onSubmitItem,
+  showAddItem,
+  onCloseAddItem,
+}) {
   const [newItem, setNewItem] = useState({
+    id: 0,
     description: "",
     deadline: "",
+    checked: false,
   });
 
   const onChangeDescription = (event) => {
-    setNewItem({ ...newItem, description: event.target.value });
+    setNewItem({
+      ...newItem,
+      id: listOfToDos.length + 1,
+      description: event.target.value,
+    });
   };
 
   const onChangeDeadline = (event) => {
@@ -23,12 +34,12 @@ export function AddItemModal({ onSubmitItem, show, onClose }) {
     });
   };
 
-  if (!show) {
+  if (!showAddItem) {
     return null;
   }
 
   return (
-    <div className="modal" onClick={onClose}>
+    <div className="modal" onClick={onCloseAddItem}>
       <div className="overlay" onClick={(event) => event.stopPropagation()}>
         <Border>
           <form className="form" onSubmit={submitItem}>
@@ -44,7 +55,7 @@ export function AddItemModal({ onSubmitItem, show, onClose }) {
             <label htmlFor="deadline">Deadline:</label>
             <input
               id="deadline"
-              type="datetime-local"
+              type="date"
               name="deadline"
               value={newItem.deadline}
               onChange={onChangeDeadline}

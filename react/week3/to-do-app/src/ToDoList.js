@@ -1,11 +1,11 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
 
-function ToDoList({ toDoItems, setListOfToDos }) {
+function ToDoList({ listOfToDos, setListOfToDos }) {
   // pull deleteItem out here
   // Write editItem function here
 
-  if (toDoItems.length === 0) {
+  if (listOfToDos.length === 0) {
     return (
       <div>
         <p>No items...</p>
@@ -15,15 +15,14 @@ function ToDoList({ toDoItems, setListOfToDos }) {
     return (
       <div>
         <ul>
-          {toDoItems.map((item) => {
+          {listOfToDos.map((item) => {
             return (
               <li key={item.id} className={item.checked ? "ruled-out" : ""}>
                 <ToDoItem
-                  description={item.description}
-                  complete={item.checked}
+                  item={item}
                   onCheck={(check) => {
                     setListOfToDos(
-                      toDoItems.map((i) => {
+                      listOfToDos.map((i) => {
                         if (i.id === item.id) {
                           return { ...i, checked: check };
                         } else {
@@ -34,8 +33,23 @@ function ToDoList({ toDoItems, setListOfToDos }) {
                   }}
                   deleteItem={() => {
                     setListOfToDos(
-                      toDoItems.filter((i) => {
+                      listOfToDos.filter((i) => {
                         return i.id !== item.id;
+                      })
+                    );
+                  }}
+                  editItem={(event) => {
+                    setListOfToDos(
+                      listOfToDos.map((i) => {
+                        if (i.id === item.id) {
+                          return {
+                            ...i,
+                            description: event.target.value,
+                            deadline: event.target.value,
+                          };
+                        } else {
+                          return i;
+                        }
                       })
                     );
                   }}
