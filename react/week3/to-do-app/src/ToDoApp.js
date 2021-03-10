@@ -74,10 +74,14 @@ function ToDoApp() {
           showAddItem={showAddItem}
           onCloseAddItem={() => setShowAddItem(false)}
           onSubmitItem={(item) => {
-            setShowAddItem(false);
-            setListOfToDos((prev) => {
-              return prev.concat(item);
-            });
+            if (item.description === "" || item.deadline === "") {
+              alert("Description and deadline are required feilds");
+            } else {
+              setShowAddItem(false);
+              setListOfToDos((prev) => {
+                return prev.concat(item);
+              });
+            }
           }}
         />
         <br />

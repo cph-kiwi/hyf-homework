@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Border from "./Border";
+import PropTypes from "prop-types";
 
 export function AddItemModal({
   listOfToDos,
@@ -68,3 +69,10 @@ export function AddItemModal({
     </div>
   );
 }
+
+AddItemModal.propTypes = {
+  listOfToDos: PropTypes.array,
+  onSubmitItem: PropTypes.func,
+  showAddItem: PropTypes.bool,
+  onCloseAddItem: PropTypes.func,
+};

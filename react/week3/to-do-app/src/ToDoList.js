@@ -1,5 +1,6 @@
 import React from "react";
 import ToDoItem from "./ToDoItem";
+import PropTypes from "prop-types";
 
 function ToDoList({ listOfToDos, checkItem, deleteItem, editItem }) {
   if (listOfToDos.length === 0) {
@@ -29,5 +30,12 @@ function ToDoList({ listOfToDos, checkItem, deleteItem, editItem }) {
     );
   }
 }
+
+ToDoList.propTypes = {
+  listOfToDos: PropTypes.array,
+  checkItem: PropTypes.func,
+  deleteItem: PropTypes.func,
+  editItem: PropTypes.func,
+};
 
 export default ToDoList;

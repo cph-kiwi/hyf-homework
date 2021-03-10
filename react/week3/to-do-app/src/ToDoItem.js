@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Border from "./Border";
 import { EditModal } from "./EditModal";
+import PropTypes from "prop-types";
 
 function ToDoItem({ item, onCheck, deleteItem, editItem }) {
   const [showEdit, setShowEdit] = useState(false);
@@ -9,7 +10,15 @@ function ToDoItem({ item, onCheck, deleteItem, editItem }) {
     <Border>
       <div className="item-details">
         <p className="paragraph">{item.description}</p>
-        <p className="paragraph">{item.deadline}</p>
+        <p
+          className={
+            item.deadline < new Date().toISOString().slice(0, 10)
+              ? "bold"
+              : "paragraph"
+          }
+        >
+          {item.deadline}
+        </p>
         <input
           type="checkbox"
           value={item.checked}
@@ -26,8 +35,12 @@ function ToDoItem({ item, onCheck, deleteItem, editItem }) {
             showEdit={showEdit}
             onCloseEdit={() => setShowEdit(false)}
             onSubmitEditedItem={(id, editedItem) => {
-              setShowEdit(false);
-              editItem(id, editedItem);
+              if (editedItem.description === "" || editedItem.deadline === "") {
+                alert("Description and deadline are required feilds");
+              } else {
+                setShowEdit(false);
+                editItem(id, editedItem);
+              }
             }}
           />
         )}
@@ -35,5 +48,12 @@ function ToDoItem({ item, onCheck, deleteItem, editItem }) {
     </Border>
   );
 }
+
+ToDoItem.propTypes = {
+  item: PropTypes.object,
+  onCheck: PropTypes.func,
+  deleteItem: PropTypes.func,
+  editItem: PropTypes.func,
+};
 
 export default ToDoItem;

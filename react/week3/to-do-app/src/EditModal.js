@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Border from "./Border";
+import PropTypes from "prop-types";
 
 export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
   const [editedItem, setEditedItem] = useState(item);
@@ -47,3 +48,9 @@ export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
     </div>
   );
 }
+
+EditModal.propTypes = {
+  item: PropTypes.object,
+  onSubmitEditedItem: PropTypes.func,
+  onCloseEdit: PropTypes.func,
+};
