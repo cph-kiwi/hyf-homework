@@ -2,7 +2,13 @@ import React from "react";
 import ToDoItem from "./ToDoItem";
 import PropTypes from "prop-types";
 
-function ToDoList({ listOfToDos, checkItem, deleteItem, editItem }) {
+function ToDoList({
+  listOfToDos,
+  checkItem,
+  deleteItem,
+  editItem,
+  getDateString,
+}) {
   if (listOfToDos.length === 0) {
     return (
       <div>
@@ -21,6 +27,7 @@ function ToDoList({ listOfToDos, checkItem, deleteItem, editItem }) {
                   onCheck={checkItem}
                   deleteItem={deleteItem}
                   editItem={editItem}
+                  getDateString={getDateString}
                 />
               </li>
             );

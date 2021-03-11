@@ -40,6 +40,10 @@ function ToDoApp() {
     );
   };
 
+  function getDateString() {
+    return new Date().toISOString().slice(0, 10);
+  }
+
   useEffect(() => {
     setIsLoading(true);
     fetch(API_URL)
@@ -76,8 +80,8 @@ function ToDoApp() {
           onSubmitItem={(item) => {
             if (item.description === "" || item.deadline === "") {
               alert("Description and deadline are required feilds");
-            } else if (item.deadline < new Date().toISOString().slice(0, 10)) {
-              alert("This date is in the past");
+            } else if (item.deadline < getDateString()) {
+              alert("Deadline must be in the future");
             } else {
               setShowAddItem(false);
               setListOfToDos((prev) => {
@@ -93,6 +97,7 @@ function ToDoApp() {
           checkItem={checkItem}
           deleteItem={deleteItem}
           editItem={editItem}
+          getDateString={getDateString}
         />
       </Border>
     </div>

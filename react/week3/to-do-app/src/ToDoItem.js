@@ -3,25 +3,17 @@ import Border from "./Border";
 import { EditModal } from "./EditModal";
 import PropTypes from "prop-types";
 
-function ToDoItem({ item, onCheck, deleteItem, editItem }) {
+function ToDoItem({ item, onCheck, deleteItem, editItem, getDateString }) {
   const [showEdit, setShowEdit] = useState(false);
 
   return (
     <Border>
       <div className="item-details">
         <p className="paragraph">{item.description}</p>
-        <p
-          className={
-            item.deadline < new Date().toISOString().slice(0, 10)
-              ? "bold"
-              : "paragraph"
-          }
-        >
+        <p className={item.deadline < getDateString() ? "bold" : "paragraph"}>
           {item.deadline}
         </p>
-        {item.deadline < new Date().toISOString().slice(0, 10) ? (
-          <p>Deadline has passed</p>
-        ) : null}
+        {item.deadline < getDateString() ? <p>Deadline has passed</p> : null}
 
         <input
           type="checkbox"
