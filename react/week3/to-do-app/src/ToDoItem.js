@@ -19,6 +19,10 @@ function ToDoItem({ item, onCheck, deleteItem, editItem }) {
         >
           {item.deadline}
         </p>
+        {item.deadline < new Date().toISOString().slice(0, 10) ? (
+          <p>Deadline has passed</p>
+        ) : null}
+
         <input
           type="checkbox"
           value={item.checked}

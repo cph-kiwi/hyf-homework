@@ -76,6 +76,8 @@ function ToDoApp() {
           onSubmitItem={(item) => {
             if (item.description === "" || item.deadline === "") {
               alert("Description and deadline are required feilds");
+            } else if (item.deadline < new Date().toISOString().slice(0, 10)) {
+              alert("This date is in the past");
             } else {
               setShowAddItem(false);
               setListOfToDos((prev) => {
