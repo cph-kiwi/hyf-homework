@@ -3,7 +3,7 @@ import Border from "./Border";
 import PropTypes from "prop-types";
 
 export function AddItemModal({
-  listOfToDos,
+  length,
   onSubmitItem,
   showAddItem,
   onCloseAddItem,
@@ -18,7 +18,7 @@ export function AddItemModal({
   const onChangeDescription = (event) => {
     setNewItem({
       ...newItem,
-      id: listOfToDos.length + 1,
+      id: length + 1,
       description: event.target.value,
     });
   };

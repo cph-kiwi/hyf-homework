@@ -74,7 +74,7 @@ function ToDoApp() {
         </div>
 
         <AddItemModal
-          listOfToDos={listOfToDos}
+          length={listOfToDos.length}
           showAddItem={showAddItem}
           onCloseAddItem={() => setShowAddItem(false)}
           onSubmitItem={(item) => {

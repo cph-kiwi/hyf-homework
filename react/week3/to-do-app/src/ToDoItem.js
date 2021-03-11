@@ -33,6 +33,8 @@ function ToDoItem({ item, onCheck, deleteItem, editItem, getDateString }) {
             onSubmitEditedItem={(id, editedItem) => {
               if (editedItem.description === "" || editedItem.deadline === "") {
                 alert("Description and deadline are required feilds");
+              } else if (editItem.deadline < getDateString()) {
+                alert("Deadline must be in the future");
               } else {
                 setShowEdit(false);
                 editItem(id, editedItem);
