@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import Border from "./Border";
 import PropTypes from "prop-types";
 
-export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
+export function EditModal({
+  item,
+  onSubmitEditedItem,
+  onCloseEdit,
+  getDateString,
+}) {
   const [editedItem, setEditedItem] = useState(item);
+  const [errorMessage, setErrorMessage] = useState();
 
   const onChangeEditDescription = (event) => {
     setEditedItem({ ...editedItem, description: event.target.value });
@@ -15,13 +21,21 @@ export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
 
   const submitItem = (event) => {
     event.preventDefault();
-    onSubmitEditedItem(item.id, editedItem);
+    if (editedItem.description === "" || editedItem.deadline === "") {
+      setErrorMessage("Description and deadline are required feilds");
+    } else if (editedItem.deadline < getDateString()) {
+      setErrorMessage("Deadline must be in the future");
+    } else {
+      setErrorMessage();
+      onSubmitEditedItem(item.id, editedItem);
+    }
   };
 
   return (
     <div className="modal" onClick={onCloseEdit}>
       <div className="overlay" onClick={(event) => event.stopPropagation()}>
         <Border>
+          <h2 className="medium-title">Edit item</h2>
           <form className="form" onSubmit={submitItem}>
             <label htmlFor="description">Item description:</label>
             <input
@@ -41,6 +55,7 @@ export function EditModal({ item, onSubmitEditedItem, onCloseEdit }) {
               onChange={onChangeEditDeadline}
             />
             <br />
+            <p>{errorMessage}</p>
             <button type="submit">Save item</button>
           </form>
         </Border>

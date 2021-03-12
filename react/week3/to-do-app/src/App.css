@@ -96,6 +96,12 @@ li {
   align-items: center;
 }
 
+.Border {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .ruled-out {
   text-decoration: line-through;
 }

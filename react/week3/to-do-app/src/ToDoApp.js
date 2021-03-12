@@ -78,17 +78,12 @@ function ToDoApp() {
           showAddItem={showAddItem}
           onCloseAddItem={() => setShowAddItem(false)}
           onSubmitItem={(item) => {
-            if (item.description === "" || item.deadline === "") {
-              alert("Description and deadline are required feilds");
-            } else if (item.deadline < getDateString()) {
-              alert("Deadline must be in the future");
-            } else {
-              setShowAddItem(false);
-              setListOfToDos((prev) => {
-                return prev.concat(item);
-              });
-            }
+            setShowAddItem(false);
+            setListOfToDos((prev) => {
+              return prev.concat(item);
+            });
           }}
+          getDateString={getDateString}
         />
         <br />
         {isLoading && <div>Loading...</div>}
