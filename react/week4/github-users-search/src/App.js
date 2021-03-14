@@ -37,7 +37,7 @@ function App() {
       <h1>Github user searcher</h1>
       <input type="text" value={query} onChange={onChange} />
 
-      {query === "" ? isLoading && <div>Loading...</div> : ""}
+      {query === "" ? isLoading && <div>Loading...</div> : null}
 
       {query === "" ? (
         <p>{results}</p>
