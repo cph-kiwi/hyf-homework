@@ -11,9 +11,10 @@ function App() {
     <div className="App">
       <h1>Github user searcher</h1>
       <SearchInput />
-      {resultsContext.query === ""
-        ? resultsContext.isLoading && <div>Loading...</div>
-        : null}
+      {resultsContext.isLoading && (
+        <div className="loading-indicator">Loading...</div>
+      )}
+      <div className="loading-indicator">Loading...</div>
       <Results />
     </div>
   );

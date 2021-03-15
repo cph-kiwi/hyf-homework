@@ -7,7 +7,7 @@ function Results() {
   return (
     <div>
       {resultsContext.query === "" ? (
-        <p>{resultsContext.results}</p>
+        <p>Type in the search field to see results</p>
       ) : (
         resultsContext.results?.map((match) => {
           return (
@@ -24,6 +24,10 @@ function Results() {
           );
         })
       )}
+
+      {resultsContext.query !== "" && resultsContext.results.length === 0 ? (
+        <p>No matches</p>
+      ) : null}
     </div>
   );
 }
