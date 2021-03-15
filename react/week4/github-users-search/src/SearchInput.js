@@ -7,6 +7,7 @@ export function SearchInput() {
   return (
     <div>
       <input
+        className="text-input"
         type="text"
         value={resultsContext.query}
         onChange={resultsContext.onChange}

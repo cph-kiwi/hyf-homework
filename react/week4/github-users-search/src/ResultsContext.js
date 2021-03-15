@@ -26,6 +26,7 @@ const ResultsProvider = ({ children }) => {
       return;
     } else {
       setIsLoading(true);
+
       const timerID = setTimeout(() => {
         fetch(API_URL)
           .then((response) => response.json())
@@ -38,6 +39,7 @@ const ResultsProvider = ({ children }) => {
             console.error("error fetching (reason why it failed)...", error);
           });
       }, 500);
+
       return () => {
         clearTimeout(timerID);
       };

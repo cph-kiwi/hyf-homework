@@ -5,17 +5,17 @@ function Results() {
   const resultsContext = useContext(ResultsContext);
 
   return (
-    <div>
+    <div className="results-list">
       {resultsContext.query === "" ? (
         <p>Type in the search field to see results</p>
       ) : (
         resultsContext.results?.map((match) => {
           return (
-            <div key={match.id}>
+            <div className="list-item" key={match.id}>
               <img
                 src={match.avatar_url}
                 alt="Avatar of matching github user"
-                width="50"
+                width="100"
               />
               <p>
                 <a href={match.url}>{match.login}</a>
@@ -26,7 +26,7 @@ function Results() {
       )}
 
       {resultsContext.query !== "" && resultsContext.results.length === 0 ? (
-        <p>No matches</p>
+        <p>No results...</p>
       ) : null}
     </div>
   );

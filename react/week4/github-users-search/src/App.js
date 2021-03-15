@@ -6,15 +6,16 @@ import "./App.css";
 
 function App() {
   const resultsContext = useContext(ResultsContext);
-  // console.log(resultsContext.results);
+
   return (
     <div className="App">
       <h1>Github user searcher</h1>
       <SearchInput />
       {resultsContext.isLoading && (
-        <div className="loading-indicator">Loading...</div>
+        <div className="loading-indicator">
+          <p>Loading...</p>
+        </div>
       )}
-      <div className="loading-indicator">Loading...</div>
       <Results />
     </div>
   );
