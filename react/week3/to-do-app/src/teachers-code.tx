@@ -1,0 +1,30 @@
+<div style={{textDecoration: checked ? 'line-through' : 'none'}}>
+        {isEditing ? (
+          <input
+            type='text'
+            value={description}
+            onChange={onDescriptionChange}
+          />
+        ) : (
+          <h3>{description}</h3>
+        )}
+        {isEditing ? (
+          <input
+            type='date'
+            id='deadline'
+            name='deadline'
+            value={deadline}
+            onChange={onDeadlineChange}
+          />
+        ) : (
+          <h4>{deadline}</h4>
+        )}
+      </div>
+
+
+
+      <button onClick={() => setIsEditing(!isEditing)}>
+        {isEditing ? 'Update' : 'Edit'}
+      </button>
+
+
