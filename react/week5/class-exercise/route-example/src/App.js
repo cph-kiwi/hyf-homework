@@ -15,9 +15,13 @@ function App() {
     fetch(API)
       .then((response) => response.json())
       .then((data) => {
+        console.log("data inside fetch in App.js", data);
         setPosts(data);
+        console.log("posts after setPosts in App.js", posts);
       });
   }, []);
+
+  console.log("posts before return from App.js", posts);
 
   return (
     <div className="app">
@@ -28,7 +32,6 @@ function App() {
         <Route exact path="/">
           <Home posts={posts} />
         </Route>
-
         <Route path="/post/:id" component={<Post posts={posts} />} />
         <Route path="*">
           <div>404 not found</div>

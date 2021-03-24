@@ -5,6 +5,9 @@ export function Post({ posts }) {
   const params = useParams();
   const post = posts.find((post) => post.id === Number(params.id));
 
+  console.log("post before return in Post.js", post);
+  console.log("post.id", post.id);
+  console.log("params.id", params.id);
   return (
     <div>
       {!post ? (
