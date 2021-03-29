@@ -17,6 +17,12 @@
   }
 }
 
+:root {
+  --millenial-pink: #f7cac9;
+  --peach: #f7d6c9;
+  --plum: #614e55;
+}
+
 .loading-indicator::before {
   content: "";
   width: 24px;
@@ -39,9 +45,7 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: "Montserrat", sans-serif;
-  --millenial-pink: #f7cac9;
-  --peach: #f7d6c9;
-  --plum: #614e55;
+
   background-color: var(--millenial-pink);
   color: var(--plum);
 }

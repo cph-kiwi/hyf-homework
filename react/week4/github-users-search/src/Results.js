@@ -9,16 +9,16 @@ function Results() {
       {resultsContext.query === "" ? (
         <p>Type in the search field to see results</p>
       ) : (
-        resultsContext.results?.map((match) => {
+        resultsContext.results?.map((result) => {
           return (
-            <div className="list-item" key={match.id}>
+            <div className="list-item" key={result.id}>
               <img
-                src={match.avatar_url}
-                alt="Avatar of matching github user"
+                src={result.avatar_url}
+                alt={`Avatar of GitHub user ${result.login}`}
                 width="100"
               />
               <p>
-                <a href={match.url}>{match.login}</a>
+                <a href={result.url}>{result.login}</a>
               </p>
             </div>
           );

@@ -29,14 +29,19 @@ const ResultsProvider = ({ children }) => {
 
       const timerID = setTimeout(() => {
         fetch(API_URL)
-          .then((response) => response.json())
-          .then((matches) => {
-            const { items } = matches;
-            setResults(items);
-            setIsLoading(false);
+          .then((response) => {
+            if (response.ok) {
+              response.json().then((matches) => {
+                const { items } = matches;
+                setResults(items);
+                setIsLoading(false);
+              });
+            } else {
+              console.log("Response error message", matches.message);
+            }
           })
           .catch((error) => {
-            console.error("error fetching (reason why it failed)...", error);
+            console.log("Catch error message", error.message);
           });
       }, 500);
 
