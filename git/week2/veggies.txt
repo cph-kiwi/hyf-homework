@@ -1,5 +1,7 @@
 potatoes
 carrots
-onions
+shallots
 celery
 mushrooms
+capsicum
+asparagus
