@@ -1,6 +1,6 @@
 potatoes
 carrots
-shallots
+scallions
 celery
 mushrooms
 capsicum
