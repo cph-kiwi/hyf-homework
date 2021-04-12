@@ -1,5 +1,5 @@
 potatoes
 carrots
-onions
+scallions
 celery
 mushrooms
